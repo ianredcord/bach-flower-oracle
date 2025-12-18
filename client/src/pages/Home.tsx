@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import { Card } from "@/components/Card";
 import { AudioPlayer } from "@/components/AudioPlayer";
+import { ShareCard } from "@/components/ShareCard";
+import html2canvas from "html2canvas";
+import { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import remediesData from "@/data/remedies.json";
@@ -17,6 +20,8 @@ interface Remedy {
 
 export default function Home() {
   const [selectedCards, setSelectedCards] = useState<number[]>([]);
+  const shareCardRef = useRef<HTMLDivElement>(null);
+  const [isGenerating, setIsGenerating] = useState(false);
   const [isRevealed, setIsRevealed] = useState(false);
   const [shuffledRemedies, setShuffledRemedies] = useState<Remedy[]>([]);
 
@@ -45,6 +50,29 @@ export default function Home() {
   const handleReveal = () => {
     if (selectedCards.length > 0) {
       setIsRevealed(true);
+    }
+  };
+
+  const handleDownloadShare = async () => {
+    if (!shareCardRef.current) return;
+    
+    try {
+      setIsGenerating(true);
+      const canvas = await html2canvas(shareCardRef.current, {
+        scale: 2, // Higher quality
+        useCORS: true,
+        backgroundColor: '#F9F7F2',
+      });
+      
+      const selectedRemedy = shuffledRemedies[selectedCards[0]];
+      const link = document.createElement('a');
+      link.download = `bach-flower-${selectedRemedy.name_en.toLowerCase().replace(/\s+/g, '-')}.png`;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    } catch (error) {
+      console.error('Failed to generate share image:', error);
+    } finally {
+      setIsGenerating(false);
     }
   };
 
@@ -160,14 +188,32 @@ export default function Home() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 20 }}
               >
-                <Button 
-                  size="lg" 
-                  variant="outline"
-                  onClick={shuffleCards}
-                  className="bg-white/80 backdrop-blur-sm border-primary/20 text-primary hover:bg-primary/5 rounded-full px-8 py-6 text-lg shadow-md hover:shadow-lg transition-all duration-300 font-serif tracking-wider"
-                >
-                  重新抽牌
-                </Button>
+                <div className="flex flex-col items-center gap-4">
+                  <Button 
+                    size="lg"
+                    onClick={handleDownloadShare}
+                    disabled={isGenerating}
+                    className="bg-primary hover:bg-primary/90 text-white rounded-full px-8 py-6 text-lg shadow-lg hover:shadow-xl transition-all duration-300 font-serif tracking-wider w-full min-w-[240px]"
+                  >
+                    {isGenerating ? '生成中...' : '下載 IG 限動分享圖'}
+                  </Button>
+                  
+                  <Button 
+                    size="lg" 
+                    variant="ghost"
+                    onClick={shuffleCards}
+                    className="text-primary hover:bg-primary/5 rounded-full px-8 py-4 text-base transition-all duration-300 font-serif tracking-wider"
+                  >
+                    重新抽牌
+                  </Button>
+                </div>
+
+                {/* Hidden Share Card for Generation */}
+                <div className="fixed left-[-9999px] top-[-9999px]">
+                  {selectedCards.length > 0 && (
+                    <ShareCard ref={shareCardRef} remedy={shuffledRemedies[selectedCards[0]]} />
+                  )}
+                </div>
               </motion.div>
             )}
           </AnimatePresence>
