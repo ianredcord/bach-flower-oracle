@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Card } from "@/components/Card";
 import { AudioPlayer } from "@/components/AudioPlayer";
 import { ShareCard } from "@/components/ShareCard";
-import html2canvas from "html2canvas";
+import { toBlob } from 'html-to-image';
 import { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
@@ -62,27 +62,33 @@ export default function Home() {
       // Wait for images to load
       await new Promise(resolve => setTimeout(resolve, 500));
 
-      const canvas = await html2canvas(shareCardRef.current, {
-        scale: 2, // Higher quality
-        useCORS: true,
-        backgroundColor: '#F9F7F2',
-        allowTaint: true,
-        logging: false,
-        onclone: (clonedDoc) => {
-          // Ensure the cloned element is visible for rendering
-          const element = clonedDoc.querySelector('.fixed') as HTMLElement;
-          if (element) {
-            element.style.opacity = '1';
-            element.style.zIndex = '9999';
-          }
+      // Temporarily make the share card visible for rendering
+      if (shareCardRef.current) {
+        const parent = shareCardRef.current.parentElement;
+        if (parent) {
+          parent.style.opacity = '1';
+          parent.style.zIndex = '-1'; // Keep it behind other content but rendered
         }
+      }
+
+      const blob = await toBlob(shareCardRef.current, {
+        quality: 0.95,
+        backgroundColor: '#F9F7F2',
+        cacheBust: true,
       });
+
+      // Hide it again
+      if (shareCardRef.current) {
+        const parent = shareCardRef.current.parentElement;
+        if (parent) {
+          parent.style.opacity = '0';
+          parent.style.zIndex = '-50';
+        }
+      }
       
       const selectedRemedy = shuffledRemedies[selectedCards[0]];
       const fileName = `bach-flower-${selectedRemedy.name_en.toLowerCase().replace(/\s+/g, '-')}.png`;
       
-      // Convert canvas to blob
-      const blob = await new Promise<Blob | null>(resolve => canvas.toBlob(resolve, 'image/png'));
       if (!blob) throw new Error('Failed to create image blob');
 
       // Check if Web Share API is supported and can share files
@@ -97,37 +103,16 @@ export default function Home() {
         // Fallback to download
         const link = document.createElement('a');
         link.download = fileName;
-        link.href = canvas.toDataURL('image/png');
+        link.href = URL.createObjectURL(blob);
         link.click();
+        
+        // Clean up
+        setTimeout(() => URL.revokeObjectURL(link.href), 1000);
       }
     } catch (error) {
       console.error('Failed to share:', error);
-      // Fallback to download if share fails
-      try {
-        // Wait for images to load
-        await new Promise(resolve => setTimeout(resolve, 500));
-        
-        const canvas = await html2canvas(shareCardRef.current!, {
-          scale: 2,
-          useCORS: true,
-          backgroundColor: '#F9F7F2',
-          onclone: (clonedDoc) => {
-            const element = clonedDoc.querySelector('.fixed') as HTMLElement;
-            if (element) {
-              element.style.opacity = '1';
-              element.style.zIndex = '9999';
-            }
-          }
-        });
-        const selectedRemedy = shuffledRemedies[selectedCards[0]];
-        const link = document.createElement('a');
-        link.download = `bach-flower-${selectedRemedy.name_en.toLowerCase().replace(/\s+/g, '-')}.png`;
-        link.href = canvas.toDataURL('image/png');
-        link.click();
-      } catch (e) {
-        console.error('Fallback download failed:', e);
-        alert('抱歉，圖片生成失敗，請稍後再試。');
-      }
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      alert(`抱歉，圖片生成失敗 (${errorMessage})，請稍後再試。`);
     } finally {
       setIsGenerating(false);
     }
@@ -265,12 +250,12 @@ export default function Home() {
                   </Button>
                 </div>
 
-                {/* Hidden Share Card for Generation - Use z-index instead of far off-screen to ensure rendering */}
-                <div className="fixed left-0 top-0 opacity-0 -z-50 pointer-events-none">
-                  {selectedCards.length > 0 && (
-                    <ShareCard ref={shareCardRef} remedy={shuffledRemedies[selectedCards[0]]} />
-                  )}
-                </div>
+        {/* Hidden Share Card for Generation - Use z-index instead of far off-screen to ensure rendering */}
+        <div className="fixed left-0 top-0 opacity-0 -z-50 pointer-events-none w-[375px]">
+          {selectedCards.length > 0 && (
+            <ShareCard ref={shareCardRef} remedy={shuffledRemedies[selectedCards[0]]} />
+          )}
+        </div>
               </motion.div>
             )}
           </AnimatePresence>
