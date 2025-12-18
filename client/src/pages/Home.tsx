@@ -53,7 +53,7 @@ export default function Home() {
     }
   };
 
-  const handleDownloadShare = async () => {
+  const handleShare = async () => {
     if (!shareCardRef.current) return;
     
     try {
@@ -62,15 +62,48 @@ export default function Home() {
         scale: 2, // Higher quality
         useCORS: true,
         backgroundColor: '#F9F7F2',
+        allowTaint: true,
       });
       
       const selectedRemedy = shuffledRemedies[selectedCards[0]];
-      const link = document.createElement('a');
-      link.download = `bach-flower-${selectedRemedy.name_en.toLowerCase().replace(/\s+/g, '-')}.png`;
-      link.href = canvas.toDataURL('image/png');
-      link.click();
+      const fileName = `bach-flower-${selectedRemedy.name_en.toLowerCase().replace(/\s+/g, '-')}.png`;
+      
+      // Convert canvas to blob
+      const blob = await new Promise<Blob | null>(resolve => canvas.toBlob(resolve, 'image/png'));
+      if (!blob) throw new Error('Failed to create image blob');
+
+      // Check if Web Share API is supported and can share files
+      if (navigator.share && navigator.canShare && navigator.canShare({ files: [new File([blob], fileName, { type: 'image/png' })] })) {
+        const file = new File([blob], fileName, { type: 'image/png' });
+        await navigator.share({
+          title: '牟尼巴哈花精指引',
+          text: `我抽到了「${selectedRemedy.name_zh}」，它給我的指引是：${selectedRemedy.positive}`,
+          files: [file],
+        });
+      } else {
+        // Fallback to download
+        const link = document.createElement('a');
+        link.download = fileName;
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+      }
     } catch (error) {
-      console.error('Failed to generate share image:', error);
+      console.error('Failed to share:', error);
+      // Fallback to download if share fails
+      try {
+        const canvas = await html2canvas(shareCardRef.current!, {
+          scale: 2,
+          useCORS: true,
+          backgroundColor: '#F9F7F2',
+        });
+        const selectedRemedy = shuffledRemedies[selectedCards[0]];
+        const link = document.createElement('a');
+        link.download = `bach-flower-${selectedRemedy.name_en.toLowerCase().replace(/\s+/g, '-')}.png`;
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+      } catch (e) {
+        console.error('Fallback download failed:', e);
+      }
     } finally {
       setIsGenerating(false);
     }
@@ -191,11 +224,11 @@ export default function Home() {
                 <div className="flex flex-col items-center gap-4">
                   <Button 
                     size="lg"
-                    onClick={handleDownloadShare}
+                    onClick={handleShare}
                     disabled={isGenerating}
                     className="bg-primary hover:bg-primary/90 text-white rounded-full px-8 py-6 text-lg shadow-lg hover:shadow-xl transition-all duration-300 font-serif tracking-wider w-full min-w-[240px]"
                   >
-                    {isGenerating ? '生成中...' : '下載 IG 限動分享圖'}
+                    {isGenerating ? '生成中...' : '分享今日指引'}
                   </Button>
                   
                   <Button 
