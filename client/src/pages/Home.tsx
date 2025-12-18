@@ -58,11 +58,24 @@ export default function Home() {
     
     try {
       setIsGenerating(true);
+      
+      // Wait for images to load
+      await new Promise(resolve => setTimeout(resolve, 500));
+
       const canvas = await html2canvas(shareCardRef.current, {
         scale: 2, // Higher quality
         useCORS: true,
         backgroundColor: '#F9F7F2',
         allowTaint: true,
+        logging: false,
+        onclone: (clonedDoc) => {
+          // Ensure the cloned element is visible for rendering
+          const element = clonedDoc.querySelector('.fixed') as HTMLElement;
+          if (element) {
+            element.style.opacity = '1';
+            element.style.zIndex = '9999';
+          }
+        }
       });
       
       const selectedRemedy = shuffledRemedies[selectedCards[0]];
@@ -91,10 +104,20 @@ export default function Home() {
       console.error('Failed to share:', error);
       // Fallback to download if share fails
       try {
+        // Wait for images to load
+        await new Promise(resolve => setTimeout(resolve, 500));
+        
         const canvas = await html2canvas(shareCardRef.current!, {
           scale: 2,
           useCORS: true,
           backgroundColor: '#F9F7F2',
+          onclone: (clonedDoc) => {
+            const element = clonedDoc.querySelector('.fixed') as HTMLElement;
+            if (element) {
+              element.style.opacity = '1';
+              element.style.zIndex = '9999';
+            }
+          }
         });
         const selectedRemedy = shuffledRemedies[selectedCards[0]];
         const link = document.createElement('a');
@@ -103,6 +126,7 @@ export default function Home() {
         link.click();
       } catch (e) {
         console.error('Fallback download failed:', e);
+        alert('抱歉，圖片生成失敗，請稍後再試。');
       }
     } finally {
       setIsGenerating(false);
@@ -241,8 +265,8 @@ export default function Home() {
                   </Button>
                 </div>
 
-                {/* Hidden Share Card for Generation */}
-                <div className="fixed left-[-9999px] top-[-9999px]">
+                {/* Hidden Share Card for Generation - Use z-index instead of far off-screen to ensure rendering */}
+                <div className="fixed left-0 top-0 opacity-0 -z-50 pointer-events-none">
                   {selectedCards.length > 0 && (
                     <ShareCard ref={shareCardRef} remedy={shuffledRemedies[selectedCards[0]]} />
                   )}
