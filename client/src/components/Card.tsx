@@ -68,7 +68,7 @@ export function Card({ id, index, isSelected, isRevealed, onClick, content }: Ca
               </div>
               
               <div className="my-4 flex-grow flex items-center justify-center">
-                <img src="/images/flower-icon.png" alt="Flower" className="w-24 h-24 mx-auto opacity-80" />
+                <img src="/images/flower-icon-v2.png" alt="Flower" className="w-24 h-24 mx-auto opacity-80" />
               </div>
 
               <div className="space-y-4 mb-2">
@@ -77,9 +77,9 @@ export function Card({ id, index, isSelected, isRevealed, onClick, content }: Ca
                   <p className="text-sm text-stone-700 leading-relaxed">{content.emotion}</p>
                 </div>
                 
-                <div className="bg-primary/5 p-4 rounded-xl border border-primary/10 shadow-sm">
-                  <p className="text-xs text-primary/60 uppercase tracking-wider mb-2 font-medium">正向轉化</p>
-                  <p className="text-sm text-primary-foreground font-medium leading-relaxed">{content.positive}</p>
+                <div className="bg-primary/10 p-4 rounded-xl border border-primary/20 shadow-sm">
+                  <p className="text-xs text-primary uppercase tracking-wider mb-2 font-medium">正向轉化</p>
+                  <p className="text-sm text-primary font-medium leading-relaxed">{content.positive}</p>
                 </div>
               </div>
             </div>
