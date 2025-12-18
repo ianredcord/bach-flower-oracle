@@ -1,0 +1,345 @@
+{
+  "categories": [
+    {
+      "id": "fear",
+      "name_zh": "恐懼",
+      "name_en": "For Fear"
+    },
+    {
+      "id": "uncertainty",
+      "name_zh": "不確定",
+      "name_en": "For Uncertainty"
+    },
+    {
+      "id": "present",
+      "name_zh": "與現實脫節",
+      "name_en": "For Insufficient Interest in Present Circumstances"
+    },
+    {
+      "id": "loneliness",
+      "name_zh": "孤獨",
+      "name_en": "For Loneliness"
+    },
+    {
+      "id": "sensitive",
+      "name_zh": "過於敏感",
+      "name_en": "For Those Over-Sensitive to Influence and Ideas"
+    },
+    {
+      "id": "despair",
+      "name_zh": "沮喪或失望",
+      "name_en": "For Despondence or Despair"
+    },
+    {
+      "id": "overcare",
+      "name_zh": "過度關心別人",
+      "name_en": "For Over-Care for Welfare of Others"
+    }
+  ],
+  "remedies": [
+    {
+      "id": 1,
+      "name_en": "Rock Rose",
+      "name_zh": "岩玫瑰",
+      "category": "fear",
+      "emotion": "被恐懼和驚慌所淹沒",
+      "positive": "無畏與勇氣，面對危機時保持冷靜"
+    },
+    {
+      "id": 2,
+      "name_en": "Mimulus",
+      "name_zh": "溝酸醬",
+      "category": "fear",
+      "emotion": "對已知事物的恐懼，害羞膽怯",
+      "positive": "勇敢面對恐懼，享受生活而不被擔憂困擾"
+    },
+    {
+      "id": 3,
+      "name_en": "Cherry Plum",
+      "name_zh": "櫻桃李",
+      "category": "fear",
+      "emotion": "害怕失去控制，精神緊繃到極點",
+      "positive": "勇氣與沉著，保持內心平靜"
+    },
+    {
+      "id": 4,
+      "name_en": "Aspen",
+      "name_zh": "白楊",
+      "category": "fear",
+      "emotion": "莫名的恐懼和不安，說不出原因的焦慮",
+      "positive": "無畏無懼，減少莫名的擔憂"
+    },
+    {
+      "id": 5,
+      "name_en": "Red Chestnut",
+      "name_zh": "紅栗花",
+      "category": "fear",
+      "emotion": "過度擔心所愛之人的安危",
+      "positive": "保持冷靜，維持正確的觀點"
+    },
+    {
+      "id": 6,
+      "name_en": "Cerato",
+      "name_zh": "水蕨",
+      "category": "uncertainty",
+      "emotion": "懷疑自己的判斷，總是尋求他人意見",
+      "positive": "增強自信與智慧，相信自己的判斷"
+    },
+    {
+      "id": 7,
+      "name_en": "Scleranthus",
+      "name_zh": "線球草",
+      "category": "uncertainty",
+      "emotion": "難以做決定，情緒起伏不定",
+      "positive": "快速做出決定並向前邁進"
+    },
+    {
+      "id": 8,
+      "name_en": "Gentian",
+      "name_zh": "龍膽",
+      "category": "uncertainty",
+      "emotion": "遇到挫折後感到沮喪和氣餒",
+      "positive": "不受挫折影響，保持正向態度"
+    },
+    {
+      "id": 9,
+      "name_en": "Gorse",
+      "name_zh": "荊豆",
+      "category": "uncertainty",
+      "emotion": "感到絕望，看不到希望",
+      "positive": "重燃希望、信念與內在力量"
+    },
+    {
+      "id": 10,
+      "name_en": "Hornbeam",
+      "name_zh": "鵝耳櫪",
+      "category": "uncertainty",
+      "emotion": "想到任務就感到心理疲憊，缺乏動力",
+      "positive": "精神振奮，對自己的能力充滿信心"
+    },
+    {
+      "id": 11,
+      "name_en": "Wild Oat",
+      "name_zh": "野燕麥",
+      "category": "uncertainty",
+      "emotion": "感到不滿足，找不到人生方向",
+      "positive": "清楚看見自己想要的人生道路"
+    },
+    {
+      "id": 12,
+      "name_en": "Clematis",
+      "name_zh": "鐵線蓮",
+      "category": "present",
+      "emotion": "白日夢者，心不在焉，活在幻想中",
+      "positive": "對萬事萬物充滿興趣，掌控自己的思緒"
+    },
+    {
+      "id": 13,
+      "name_en": "Honeysuckle",
+      "name_zh": "忍冬",
+      "category": "present",
+      "emotion": "沉溺於過去的回憶，無法放下",
+      "positive": "珍惜過去的美好，但活在當下"
+    },
+    {
+      "id": 14,
+      "name_en": "Wild Rose",
+      "name_zh": "野玫瑰",
+      "category": "present",
+      "emotion": "對生活冷漠，缺乏熱情和動力",
+      "positive": "對生活充滿熱情與活力"
+    },
+    {
+      "id": 15,
+      "name_en": "Olive",
+      "name_zh": "橄欖",
+      "category": "present",
+      "emotion": "身心靈完全疲憊不堪",
+      "positive": "恢復精力，重新充滿活力"
+    },
+    {
+      "id": 16,
+      "name_en": "White Chestnut",
+      "name_zh": "白栗花",
+      "category": "present",
+      "emotion": "思緒無法停止，重複的念頭困擾著你",
+      "positive": "心靈平靜，思緒受到控制"
+    },
+    {
+      "id": 17,
+      "name_en": "Mustard",
+      "name_zh": "芥子",
+      "category": "present",
+      "emotion": "莫名的憂鬱，不知原因的低落",
+      "positive": "內心寧靜與喜悅，不被動搖"
+    },
+    {
+      "id": 18,
+      "name_en": "Chestnut Bud",
+      "name_zh": "栗樹芽苞",
+      "category": "present",
+      "emotion": "重複犯同樣的錯誤，無法從經驗中學習",
+      "positive": "更好的洞察力、觀察力與智慧"
+    },
+    {
+      "id": 19,
+      "name_en": "Water Violet",
+      "name_zh": "水蓳",
+      "category": "loneliness",
+      "emotion": "喜歡獨處，顯得冷漠或驕傲",
+      "positive": "與人連結，敞開心扉，不過度孤立"
+    },
+    {
+      "id": 20,
+      "name_en": "Impatiens",
+      "name_zh": "鳳仙花",
+      "category": "loneliness",
+      "emotion": "對他人或事物的緩慢感到不耐煩",
+      "positive": "耐心，過著不那麼匆忙、更放鬆的生活"
+    },
+    {
+      "id": 21,
+      "name_en": "Heather",
+      "name_zh": "石南",
+      "category": "loneliness",
+      "emotion": "以自我為中心，總是談論自己",
+      "positive": "為他人著想，願意傾聽"
+    },
+    {
+      "id": 22,
+      "name_en": "Agrimony",
+      "name_zh": "龍芽草",
+      "category": "sensitive",
+      "emotion": "用微笑掩飾內心的煩惱和痛苦",
+      "positive": "能笑看問題，同時也能處理它們"
+    },
+    {
+      "id": 23,
+      "name_en": "Centaury",
+      "name_zh": "矢車菊",
+      "category": "sensitive",
+      "emotion": "容易被他人影響，無法說不",
+      "positive": "為自己挺身而出，更加堅定自信"
+    },
+    {
+      "id": 24,
+      "name_en": "Walnut",
+      "name_zh": "胡桃",
+      "category": "sensitive",
+      "emotion": "對變化或外界影響敏感",
+      "positive": "適應人生新階段，不受外界影響"
+    },
+    {
+      "id": 25,
+      "name_en": "Holly",
+      "name_zh": "冬青",
+      "category": "sensitive",
+      "emotion": "對他人感到憤怒、嫉妒或怨恨",
+      "positive": "內心和諧，對他人充滿善意"
+    },
+    {
+      "id": 26,
+      "name_en": "Larch",
+      "name_zh": "落葉松",
+      "category": "despair",
+      "emotion": "對自己的能力缺乏信心",
+      "positive": "對自己的能力充滿信心"
+    },
+    {
+      "id": 27,
+      "name_en": "Pine",
+      "name_zh": "松樹",
+      "category": "despair",
+      "emotion": "感到內疚，總是責怪自己",
+      "positive": "以公平平衡的方式承擔責任"
+    },
+    {
+      "id": 28,
+      "name_en": "Elm",
+      "name_zh": "榆樹",
+      "category": "despair",
+      "emotion": "被責任壓得喘不過氣",
+      "positive": "有能力、有效率，恢復信心"
+    },
+    {
+      "id": 29,
+      "name_en": "Sweet Chestnut",
+      "name_zh": "甜栗花",
+      "category": "despair",
+      "emotion": "看不到痛苦的盡頭，極度絕望",
+      "positive": "恢復希望，驅散悲傷"
+    },
+    {
+      "id": 30,
+      "name_en": "Star of Bethlehem",
+      "name_zh": "聖星百合",
+      "category": "despair",
+      "emotion": "經歷負面事件後的創傷和震驚",
+      "positive": "撫慰傷痛，帶來安慰"
+    },
+    {
+      "id": 31,
+      "name_en": "Willow",
+      "name_zh": "楊柳",
+      "category": "despair",
+      "emotion": "怨恨和自憐，覺得生活不公平",
+      "positive": "樂觀，為自己的命運負全責"
+    },
+    {
+      "id": 32,
+      "name_en": "Oak",
+      "name_zh": "橡樹",
+      "category": "despair",
+      "emotion": "過度工作和疲憊，但仍堅持不懈",
+      "positive": "了解自己的極限，在任何情況下保持穩定"
+    },
+    {
+      "id": 33,
+      "name_en": "Crab Apple",
+      "name_zh": "海棠",
+      "category": "despair",
+      "emotion": "不喜歡自己身體或心靈的某些方面",
+      "positive": "控制思緒，接受自己"
+    },
+    {
+      "id": 34,
+      "name_en": "Chicory",
+      "name_zh": "菊苣",
+      "category": "overcare",
+      "emotion": "對所愛的人佔有慾強、自私或專橫",
+      "positive": "無私的愛，不求回報地付出"
+    },
+    {
+      "id": 35,
+      "name_en": "Vervain",
+      "name_zh": "馬鞭草",
+      "category": "overcare",
+      "emotion": "熱情過度消耗自己，無法休息",
+      "positive": "能夠放鬆，接受他人的觀點"
+    },
+    {
+      "id": 36,
+      "name_en": "Vine",
+      "name_zh": "葡萄藤",
+      "category": "overcare",
+      "emotion": "喜歡掌控一切，專橫霸道",
+      "positive": "能夠啟發他人，成為明智體貼的領導者"
+    },
+    {
+      "id": 37,
+      "name_en": "Beech",
+      "name_zh": "山毛櫸",
+      "category": "overcare",
+      "emotion": "不寬容、愛批評、容易挑剔",
+      "positive": "對他人寬容和有同理心"
+    },
+    {
+      "id": 38,
+      "name_en": "Rock Water",
+      "name_zh": "岩水",
+      "category": "overcare",
+      "emotion": "過度完美主義和自我要求",
+      "positive": "對自己更加靈活，不那麼僵化"
+    }
+  ]
+}
