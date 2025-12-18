@@ -64,7 +64,7 @@ export default function Home() {
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
             <h1 className="font-serif text-4xl md:text-5xl font-bold text-primary mb-4 tracking-wide">
-              巴哈花精指引
+              牟尼巴哈花精指引
             </h1>
             <p className="text-stone-500 text-lg max-w-2xl mx-auto font-light leading-relaxed">
               在大自然的智慧中尋找心靈的平衡。請靜下心來，專注於您當下的情緒，
