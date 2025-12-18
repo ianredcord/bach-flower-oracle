@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Card } from "@/components/Card";
 import { AudioPlayer } from "@/components/AudioPlayer";
 import { ShareCard } from "@/components/ShareCard";
-import { toBlob } from 'html-to-image';
+import { SharePreviewModal } from "@/components/SharePreviewModal";
 import { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
@@ -20,11 +20,10 @@ interface Remedy {
 
 export default function Home() {
   const [selectedCards, setSelectedCards] = useState<number[]>([]);
-  const shareCardRef = useRef<HTMLDivElement>(null);
-  const [isGenerating, setIsGenerating] = useState(false);
+  const [isShareModalOpen, setIsShareModalOpen] = useState(false);
   const [isRevealed, setIsRevealed] = useState(false);
   const [shuffledRemedies, setShuffledRemedies] = useState<Remedy[]>([]);
-
+  
   // Shuffle cards on mount
   useEffect(() => {
     shuffleCards();
@@ -53,69 +52,8 @@ export default function Home() {
     }
   };
 
-  const handleShare = async () => {
-    if (!shareCardRef.current) return;
-    
-    try {
-      setIsGenerating(true);
-      
-      // Wait for images to load
-      await new Promise(resolve => setTimeout(resolve, 500));
-
-      // Temporarily make the share card visible for rendering
-      if (shareCardRef.current) {
-        const parent = shareCardRef.current.parentElement;
-        if (parent) {
-          parent.style.opacity = '1';
-          parent.style.zIndex = '-1'; // Keep it behind other content but rendered
-        }
-      }
-
-      const blob = await toBlob(shareCardRef.current, {
-        quality: 0.95,
-        backgroundColor: '#F9F7F2',
-        cacheBust: true,
-      });
-
-      // Hide it again
-      if (shareCardRef.current) {
-        const parent = shareCardRef.current.parentElement;
-        if (parent) {
-          parent.style.opacity = '0';
-          parent.style.zIndex = '-50';
-        }
-      }
-      
-      const selectedRemedy = shuffledRemedies[selectedCards[0]];
-      const fileName = `bach-flower-${selectedRemedy.name_en.toLowerCase().replace(/\s+/g, '-')}.png`;
-      
-      if (!blob) throw new Error('Failed to create image blob');
-
-      // Check if Web Share API is supported and can share files
-      if (navigator.share && navigator.canShare && navigator.canShare({ files: [new File([blob], fileName, { type: 'image/png' })] })) {
-        const file = new File([blob], fileName, { type: 'image/png' });
-        await navigator.share({
-          title: '牟尼巴哈花精指引',
-          text: `我抽到了「${selectedRemedy.name_zh}」，它給我的指引是：${selectedRemedy.positive}`,
-          files: [file],
-        });
-      } else {
-        // Fallback to download
-        const link = document.createElement('a');
-        link.download = fileName;
-        link.href = URL.createObjectURL(blob);
-        link.click();
-        
-        // Clean up
-        setTimeout(() => URL.revokeObjectURL(link.href), 1000);
-      }
-    } catch (error) {
-      console.error('Failed to share:', error);
-      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-      alert(`抱歉，圖片生成失敗 (${errorMessage})，請稍後再試。`);
-    } finally {
-      setIsGenerating(false);
-    }
+  const handleShare = () => {
+    setIsShareModalOpen(true);
   };
 
   return (
@@ -234,10 +172,9 @@ export default function Home() {
                   <Button 
                     size="lg"
                     onClick={handleShare}
-                    disabled={isGenerating}
                     className="bg-primary hover:bg-primary/90 text-white rounded-full px-8 py-6 text-lg shadow-lg hover:shadow-xl transition-all duration-300 font-serif tracking-wider w-full min-w-[240px]"
                   >
-                    {isGenerating ? '生成中...' : '分享今日指引'}
+                    分享今日指引
                   </Button>
                   
                   <Button 
@@ -249,17 +186,19 @@ export default function Home() {
                     重新抽牌
                   </Button>
                 </div>
-
-        {/* Hidden Share Card for Generation - Use z-index instead of far off-screen to ensure rendering */}
-        <div className="fixed left-0 top-0 opacity-0 -z-50 pointer-events-none w-[375px]">
-          {selectedCards.length > 0 && (
-            <ShareCard ref={shareCardRef} remedy={shuffledRemedies[selectedCards[0]]} />
-          )}
-        </div>
               </motion.div>
             )}
           </AnimatePresence>
         </div>
+
+        {/* Share Preview Modal */}
+        {selectedCards.length > 0 && (
+          <SharePreviewModal 
+            isOpen={isShareModalOpen}
+            onClose={() => setIsShareModalOpen(false)}
+            remedy={shuffledRemedies[selectedCards[0]]}
+          />
+        )}
 
         {/* Footer Info */}
         <footer className="mt-auto py-8 text-center text-stone-400 text-sm font-light">
