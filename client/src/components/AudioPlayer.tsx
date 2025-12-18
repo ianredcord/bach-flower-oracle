@@ -8,7 +8,7 @@ export function AudioPlayer() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
-    audioRef.current = new Audio('/audio/forest-ambience.wav');
+    audioRef.current = new Audio('/audio/forest-ambience.mp3');
     audioRef.current.loop = true;
     audioRef.current.volume = 0.3; // Set initial volume to 30%
 
