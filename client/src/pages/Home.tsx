@@ -114,12 +114,12 @@ export default function Home() {
               </motion.div>
             ) : (
               <motion.div 
-                className="flex flex-wrap justify-center gap-8 md:gap-12 items-start min-h-[400px]"
+                className="flex flex-wrap justify-center gap-8 md:gap-12 items-center min-h-[60vh] py-8"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
               >
                 {selectedCards.map((index) => (
-                  <div key={shuffledRemedies[index].id} className="flex flex-col items-center">
+                  <div key={shuffledRemedies[index].id} className="flex flex-col items-center transform transition-all duration-500 hover:scale-105">
                     <Card
                       id={shuffledRemedies[index].id}
                       index={index}
