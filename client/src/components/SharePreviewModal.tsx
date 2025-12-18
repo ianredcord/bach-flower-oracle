@@ -39,10 +39,10 @@ export function SharePreviewModal({ isOpen, onClose, remedy }: SharePreviewModal
       // Use toPng -> fetch -> blob as the most stable cross-platform method
       // Direct toBlob has issues on some mobile browsers
       const dataUrl = await toPng(shareCardRef.current, {
-        quality: 0.95,
+        quality: 0.8, // Slightly reduce quality to save memory
         backgroundColor: '#F9F7F2',
         cacheBust: true,
-        pixelRatio: 2,
+        pixelRatio: 1, // Reduce to 1x to prevent OOM on mobile devices (1080x1920 is already high enough)
         // Filter out any problematic elements if needed
         filter: (node) => !node.classList?.contains('exclude-from-capture'),
       });
