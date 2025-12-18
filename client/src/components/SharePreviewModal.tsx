@@ -33,29 +33,22 @@ export function SharePreviewModal({ isOpen, onClose, remedy }: SharePreviewModal
       // Wait a bit for images to load
       await new Promise(resolve => setTimeout(resolve, 500));
 
-      // Use toBlob directly for better performance, but fallback to toPng if needed
-      let blob: Blob | null = null;
+      // Force a small delay to ensure fonts and images are fully loaded
+      await document.fonts.ready;
       
-      try {
-        // Try toBlob first
-        blob = await toBlob(shareCardRef.current, {
-          quality: 0.95,
-          backgroundColor: '#F9F7F2',
-          cacheBust: true,
-          pixelRatio: 2,
-        });
-      } catch (e) {
-        console.warn('toBlob failed, falling back to toPng', e);
-        // Fallback to toPng -> fetch -> blob
-        const dataUrl = await toPng(shareCardRef.current, {
-          quality: 0.95,
-          backgroundColor: '#F9F7F2',
-          cacheBust: true,
-          pixelRatio: 2,
-        });
-        const res = await fetch(dataUrl);
-        blob = await res.blob();
-      }
+      // Use toPng -> fetch -> blob as the most stable cross-platform method
+      // Direct toBlob has issues on some mobile browsers
+      const dataUrl = await toPng(shareCardRef.current, {
+        quality: 0.95,
+        backgroundColor: '#F9F7F2',
+        cacheBust: true,
+        pixelRatio: 2,
+        // Filter out any problematic elements if needed
+        filter: (node) => !node.classList?.contains('exclude-from-capture'),
+      });
+
+      const res = await fetch(dataUrl);
+      const blob = await res.blob();
 
       if (!blob) throw new Error('無法生成圖片');
 
@@ -73,11 +66,8 @@ export function SharePreviewModal({ isOpen, onClose, remedy }: SharePreviewModal
         // Fallback to download
         const link = document.createElement('a');
         link.download = fileName;
-        link.href = URL.createObjectURL(blob);
+        link.href = dataUrl; // Use dataUrl directly for download fallback
         link.click();
-        
-        // Clean up
-        setTimeout(() => URL.revokeObjectURL(link.href), 1000);
       }
       
       onClose();
