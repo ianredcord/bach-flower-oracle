@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Card } from "@/components/Card";
+import { AudioPlayer } from "@/components/AudioPlayer";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import remediesData from "@/data/remedies.json";
@@ -49,6 +50,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-[#F9F7F2] text-stone-800 font-sans overflow-x-hidden">
+      <AudioPlayer />
       {/* Hero Background */}
       <div className="fixed inset-0 z-0 pointer-events-none">
         <div className="absolute inset-0 bg-[url('/images/hero-bg.png')] bg-cover bg-center opacity-30 mix-blend-multiply" />
