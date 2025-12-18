@@ -35,11 +35,9 @@ export default function Home() {
     if (isRevealed) return;
 
     if (selectedCards.includes(index)) {
-      setSelectedCards(selectedCards.filter((i) => i !== index));
+      setSelectedCards([]);
     } else {
-      if (selectedCards.length < 3) {
-        setSelectedCards([...selectedCards, index]);
-      }
+      setSelectedCards([index]);
     }
   };
 
@@ -70,7 +68,7 @@ export default function Home() {
             </h1>
             <p className="text-stone-500 text-lg max-w-2xl mx-auto font-light leading-relaxed">
               在大自然的智慧中尋找心靈的平衡。請靜下心來，專注於您當下的情緒，
-              然後憑直覺選取 1 到 3 張牌卡。
+              然後憑直覺選取 1 張牌卡。
             </p>
           </motion.div>
         </header>
@@ -149,7 +147,7 @@ export default function Home() {
                   onClick={handleReveal}
                   className="bg-primary hover:bg-primary/90 text-white rounded-full px-8 py-6 text-lg shadow-lg hover:shadow-xl transition-all duration-300 font-serif tracking-wider"
                 >
-                  揭示指引 ({selectedCards.length})
+                  揭示指引
                 </Button>
               </motion.div>
             )}
