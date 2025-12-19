@@ -29,7 +29,8 @@ export function SharePreviewModal({ isOpen, onClose, remedy }: SharePreviewModal
   const shareUrl = window.location.href;
   const shareText = `我抽到了「${remedy.name_zh}」，它給我的指引是：${remedy.positive}\n\n✨ 牟尼巴哈花精指引 ✨\n${shareUrl}`;
 
-  const handleInstagramShare = async () => {
+  const handleInstagramShare = async (e: React.MouseEvent) => {
+    e.preventDefault();
     // Copy text to clipboard
     try {
       await navigator.clipboard.writeText(shareText);
@@ -52,7 +53,8 @@ export function SharePreviewModal({ isOpen, onClose, remedy }: SharePreviewModal
     }
   };
 
-  const handleFacebookShare = async () => {
+  const handleFacebookShare = async (e: React.MouseEvent) => {
+    e.preventDefault();
     if (!shareCardRef.current) return;
     if (!isImageReady) {
       alert('請稍候，圖片正在載入中...');
@@ -116,7 +118,8 @@ export function SharePreviewModal({ isOpen, onClose, remedy }: SharePreviewModal
     }
   };
 
-  const handleImageShare = async () => {
+  const handleImageShare = async (e: React.MouseEvent) => {
+    e.preventDefault();
     if (!shareCardRef.current) return;
     if (!isImageReady) {
       alert('請稍候，圖片正在載入中...');
@@ -201,6 +204,7 @@ export function SharePreviewModal({ isOpen, onClose, remedy }: SharePreviewModal
           <div className="w-full max-w-xs space-y-3">
             <div className="grid grid-cols-2 gap-3">
               <Button 
+                type="button"
                 onClick={handleInstagramShare}
                 className="bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] hover:opacity-90 text-white rounded-full h-12 text-base font-medium"
               >
@@ -208,6 +212,7 @@ export function SharePreviewModal({ isOpen, onClose, remedy }: SharePreviewModal
                 IG 分享
               </Button>
               <Button 
+                type="button"
                 onClick={handleFacebookShare}
                 disabled={isFbGenerating || !isImageReady}
                 className="bg-[#1877F2] hover:bg-[#166fe5] text-white rounded-full h-12 text-base font-medium"
@@ -231,6 +236,7 @@ export function SharePreviewModal({ isOpen, onClose, remedy }: SharePreviewModal
             </div>
 
             <Button 
+              type="button"
               onClick={handleImageShare} 
               disabled={isGenerating || !isImageReady}
               variant="outline"
@@ -247,6 +253,23 @@ export function SharePreviewModal({ isOpen, onClose, remedy }: SharePreviewModal
                   下載 / 分享圖片
                 </>
               )}
+            </Button>
+
+            <Button 
+              type="button"
+              onClick={(e) => {
+                e.preventDefault();
+                const link = document.createElement('a');
+                link.download = `bach-flower-${remedy.name_en.toLowerCase().replace(/\s+/g, '-')}-illustration.png`;
+                link.href = `/images/flowers/${remedy.id}.png`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+              }}
+              variant="ghost"
+              className="w-full text-stone-500 hover:text-stone-700 hover:bg-stone-100 rounded-full h-10 text-sm"
+            >
+              僅下載植物插畫 (不含文字)
             </Button>
           </div>
           
