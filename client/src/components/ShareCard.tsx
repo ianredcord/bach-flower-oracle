@@ -30,15 +30,10 @@ const toBase64 = (url: string): Promise<string> => {
 
 export const ShareCard = forwardRef<HTMLDivElement, ShareCardProps>(({ remedy }, ref) => {
   const currentUrl = window.location.href;
-  const [flowerIconBase64, setFlowerIconBase64] = useState<string>('');
   const [bgBase64, setBgBase64] = useState<string>('');
 
   useEffect(() => {
-    // Pre-load images as Base64 to avoid CORS issues during capture
-    toBase64('/images/flower-icon-v2.png')
-      .then(setFlowerIconBase64)
-      .catch(err => console.error('Failed to load flower icon:', err));
-      
+    // Pre-load background image as Base64
     toBase64('/images/hero-bg.png')
       .then(setBgBase64)
       .catch(err => console.error('Failed to load bg:', err));
@@ -80,14 +75,14 @@ export const ShareCard = forwardRef<HTMLDivElement, ShareCardProps>(({ remedy },
           <h1 className="text-7xl font-bold text-[#5C7A5C] mb-4">{remedy.name_zh}</h1>
           <p className="text-4xl text-[#8C9E8C] italic font-serif mb-12">{remedy.name_en}</p>
           
-          <div className="w-48 h-48 mb-12 opacity-90">
-            {flowerIconBase64 && (
-              <img 
-                src={flowerIconBase64} 
-                alt="Flower" 
-                className="w-full h-full object-contain" 
-              />
-            )}
+          <div className="w-48 h-48 mb-12 opacity-90 text-[#6B8E6B]">
+            {/* Inline SVG Flower Icon - Guaranteed to render */}
+            <svg viewBox="0 0 200 200" fill="currentColor" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+              <path d="M100 20C100 20 110 60 140 70C170 80 190 100 190 100C190 100 160 110 150 140C140 170 100 180 100 180C100 180 60 170 50 140C40 110 10 100 10 100C10 100 30 80 60 70C90 60 100 20 100 20Z" fillOpacity="0.2"/>
+              <path d="M100 40C100 40 105 70 125 75C145 80 160 100 160 100C160 100 140 105 135 125C130 145 100 150 100 150C100 150 70 145 65 125C60 105 40 100 40 100C40 100 55 80 75 75C95 70 100 40 100 40Z" fillOpacity="0.4"/>
+              <path d="M100 60C100 60 102 80 115 82C128 84 135 100 135 100C135 100 120 102 118 115C116 128 100 130 100 130C100 130 84 128 82 115C80 102 65 100 65 100C65 100 72 84 85 82C98 80 100 60 100 60Z" fillOpacity="0.6"/>
+              <circle cx="100" cy="100" r="10" fillOpacity="0.8"/>
+            </svg>
           </div>
 
           <div className="text-center space-y-6 w-full px-8">
