@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { FlowerIcon } from "./FlowerIcon";
+
 import { motion } from "framer-motion";
 
 interface CardProps {
@@ -69,7 +69,14 @@ export function Card({ id, index, isSelected, isRevealed, onClick, content }: Ca
               </div>
               
               <div className="my-4 flex-grow flex items-center justify-center">
-                <FlowerIcon remedyId={id} className="w-32 h-32 mx-auto text-primary/80" />
+                <div className="w-40 h-40 mx-auto rounded-full overflow-hidden border-4 border-stone-100 shadow-inner bg-stone-50">
+                  <img 
+                    src={`/images/flowers/${id}.png`}
+                    alt={content.name_en}
+                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-700"
+                    loading="eager"
+                  />
+                </div>
               </div>
 
               <div className="space-y-4 mb-2">

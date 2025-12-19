@@ -1,7 +1,7 @@
 import { QRCodeSVG } from 'qrcode.react';
 import { forwardRef, useEffect, useState } from 'react';
 import { Remedy } from '../data/types';
-import { FlowerIcon } from './FlowerIcon';
+
 
 interface ShareCardProps {
   remedy: Remedy;
@@ -32,13 +32,19 @@ const toBase64 = (url: string): Promise<string> => {
 export const ShareCard = forwardRef<HTMLDivElement, ShareCardProps>(({ remedy }, ref) => {
   const currentUrl = window.location.href;
   const [bgBase64, setBgBase64] = useState<string>('');
+  const [flowerBase64, setFlowerBase64] = useState<string>('');
 
   useEffect(() => {
     // Pre-load background image as Base64
     toBase64('/images/hero-bg.png')
       .then(setBgBase64)
       .catch(err => console.error('Failed to load bg:', err));
-  }, []);
+
+    // Pre-load flower image as Base64
+    toBase64(`/images/flowers/${remedy.id}.png`)
+      .then(setFlowerBase64)
+      .catch(err => console.error('Failed to load flower:', err));
+  }, [remedy.id]);
 
   return (
       <div
@@ -76,8 +82,14 @@ export const ShareCard = forwardRef<HTMLDivElement, ShareCardProps>(({ remedy },
           <h1 className="text-7xl font-bold text-[#5C7A5C] mb-4">{remedy.name_zh}</h1>
           <p className="text-4xl text-[#8C9E8C] italic font-serif mb-12">{remedy.name_en}</p>
           
-          <div className="w-48 h-48 mb-12 opacity-90 text-[#6B8E6B]">
-            <FlowerIcon remedyId={remedy.id} className="w-full h-full" />
+          <div className="w-64 h-64 mb-12 rounded-full overflow-hidden border-4 border-[#F9F7F2] shadow-inner bg-[#F9F7F2]">
+            {flowerBase64 && (
+              <img 
+                src={flowerBase64} 
+                alt={remedy.name_en} 
+                className="w-full h-full object-cover"
+              />
+            )}
           </div>
 
           <div className="text-center space-y-6 w-full px-8">
