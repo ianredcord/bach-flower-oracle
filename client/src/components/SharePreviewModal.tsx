@@ -28,21 +28,38 @@ export function SharePreviewModal({ isOpen, onClose, remedy }: SharePreviewModal
 
   // Auto-generate image on mount
   useEffect(() => {
+    let isMounted = true;
+    
     const generateImage = async () => {
       if (!shareCardRef.current) return;
 
       try {
         // Wait a bit for images to load
         await new Promise(resolve => setTimeout(resolve, 800));
-        await document.fonts.ready;
+        
+        // Wait for fonts with timeout
+        try {
+          await Promise.race([
+            document.fonts.ready,
+            new Promise((_, reject) => setTimeout(() => reject(new Error('Font load timeout')), 2000))
+          ]);
+        } catch (e) {
+          console.warn('Font loading timed out, proceeding anyway');
+        }
 
-        const dataUrl = await toPng(shareCardRef.current, {
-          quality: 0.8,
-          backgroundColor: '#F9F7F2',
-          cacheBust: true,
-          pixelRatio: 1,
-          filter: (node) => !node.classList?.contains('exclude-from-capture'),
-        });
+        // Generate image with timeout
+        const dataUrl = await Promise.race([
+          toPng(shareCardRef.current, {
+            quality: 0.8,
+            backgroundColor: '#F9F7F2',
+            cacheBust: true,
+            pixelRatio: 1,
+            filter: (node) => !node.classList?.contains('exclude-from-capture'),
+          }),
+          new Promise<string>((_, reject) => setTimeout(() => reject(new Error('Image generation timeout')), 5000))
+        ]);
+
+        if (!isMounted) return;
 
         const res = await fetch(dataUrl);
         const blob = await res.blob();
@@ -53,13 +70,26 @@ export function SharePreviewModal({ isOpen, onClose, remedy }: SharePreviewModal
         setGeneratedDataUrl(dataUrl);
       } catch (error) {
         console.error('Image generation failed:', error);
+        // Even if failed, stop loading state so user can try again or see error
       } finally {
-        setIsGenerating(false);
+        if (isMounted) {
+          setIsGenerating(false);
+        }
       }
     };
 
+    // Reset state on open
+    setIsGenerating(true);
+    setGeneratedFile(null);
+    setGeneratedDataUrl(null);
+
     // Small delay to ensure modal animation is done
-    setTimeout(generateImage, 300);
+    const timer = setTimeout(generateImage, 300);
+    
+    return () => {
+      isMounted = false;
+      clearTimeout(timer);
+    };
   }, [remedy]);
 
   const handleShare = async () => {
