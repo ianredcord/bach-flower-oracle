@@ -1,7 +1,7 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { ShareCard } from "./ShareCard";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { toPng, toBlob } from 'html-to-image';
 import { Loader2, Share2, Download } from "lucide-react";
 
@@ -22,51 +22,62 @@ interface SharePreviewModalProps {
 
 export function SharePreviewModal({ isOpen, onClose, remedy }: SharePreviewModalProps) {
   const shareCardRef = useRef<HTMLDivElement>(null);
-  const [isGenerating, setIsGenerating] = useState(false);
+  const [isGenerating, setIsGenerating] = useState(true);
+  const [generatedFile, setGeneratedFile] = useState<File | null>(null);
+  const [generatedDataUrl, setGeneratedDataUrl] = useState<string | null>(null);
+
+  // Auto-generate image on mount
+  useEffect(() => {
+    const generateImage = async () => {
+      if (!shareCardRef.current) return;
+
+      try {
+        // Wait a bit for images to load
+        await new Promise(resolve => setTimeout(resolve, 800));
+        await document.fonts.ready;
+
+        const dataUrl = await toPng(shareCardRef.current, {
+          quality: 0.8,
+          backgroundColor: '#F9F7F2',
+          cacheBust: true,
+          pixelRatio: 1,
+          filter: (node) => !node.classList?.contains('exclude-from-capture'),
+        });
+
+        const res = await fetch(dataUrl);
+        const blob = await res.blob();
+        const fileName = `bach-flower-${remedy.name_en.toLowerCase().replace(/\s+/g, '-')}.png`;
+        const file = new File([blob], fileName, { type: 'image/png' });
+
+        setGeneratedFile(file);
+        setGeneratedDataUrl(dataUrl);
+      } catch (error) {
+        console.error('Image generation failed:', error);
+      } finally {
+        setIsGenerating(false);
+      }
+    };
+
+    // Small delay to ensure modal animation is done
+    setTimeout(generateImage, 300);
+  }, [remedy]);
 
   const handleShare = async () => {
-    if (!shareCardRef.current) return;
-
+    if (!generatedFile || !generatedDataUrl) return;
+    
     try {
-      setIsGenerating(true);
-      
-      // Wait a bit for images to load
-      await new Promise(resolve => setTimeout(resolve, 500));
-
-      // Force a small delay to ensure fonts and images are fully loaded
-      await document.fonts.ready;
-      
-      // Use toPng -> fetch -> blob as the most stable cross-platform method
-      // Direct toBlob has issues on some mobile browsers
-      const dataUrl = await toPng(shareCardRef.current, {
-        quality: 0.8, // Slightly reduce quality to save memory
-        backgroundColor: '#F9F7F2',
-        cacheBust: true,
-        pixelRatio: 1, // Reduce to 1x to prevent OOM on mobile devices (1080x1920 is already high enough)
-        // Filter out any problematic elements if needed
-        filter: (node) => !node.classList?.contains('exclude-from-capture'),
-      });
-
-      const res = await fetch(dataUrl);
-      const blob = await res.blob();
-
-      if (!blob) throw new Error('無法生成圖片');
-
-      const fileName = `bach-flower-${remedy.name_en.toLowerCase().replace(/\s+/g, '-')}.png`;
-      const file = new File([blob], fileName, { type: 'image/png' });
-
       // Check if Web Share API is supported
-      if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+      if (navigator.share && navigator.canShare && navigator.canShare({ files: [generatedFile] })) {
         await navigator.share({
           title: '牟尼巴哈花精指引',
           text: `我抽到了「${remedy.name_zh}」，它給我的指引是：${remedy.positive}`,
-          files: [file],
+          files: [generatedFile],
         });
       } else {
         // Fallback to download
         const link = document.createElement('a');
-        link.download = fileName;
-        link.href = dataUrl; // Use dataUrl directly for download fallback
+        link.download = generatedFile.name;
+        link.href = generatedDataUrl;
         link.click();
       }
       
@@ -75,8 +86,6 @@ export function SharePreviewModal({ isOpen, onClose, remedy }: SharePreviewModal
       console.error('Share failed:', error);
       const errorMessage = error instanceof Error ? error.message : 'Unknown error';
       alert(`分享失敗 (${errorMessage})，請嘗試長按圖片儲存。`);
-    } finally {
-      setIsGenerating(false);
     }
   };
 
@@ -103,7 +112,7 @@ export function SharePreviewModal({ isOpen, onClose, remedy }: SharePreviewModal
               {isGenerating ? (
                 <>
                   <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                  處理中...
+                  準備中...
                 </>
               ) : (
                 <>
