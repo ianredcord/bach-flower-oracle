@@ -3,14 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ShareCard } from "./ShareCard";
 import { useRef, useState } from "react";
 import { toPng } from 'html-to-image';
-import { Loader2, Share2, Facebook } from "lucide-react";
-
-// Custom Line Icon since lucide-react might not have it
-const LineIcon = ({ className }: { className?: string }) => (
-  <svg viewBox="0 0 24 24" fill="currentColor" className={className} height="1em" width="1em">
-    <path d="M20.3 10c0-4.4-4.2-8-9.3-8S1.7 5.6 1.7 10c0 4 3.4 7.4 8.2 7.9.3 0 .7.2.8.5v1.9c0 .3-.1.6-.4.6-.2 0-.3 0-.4-.1-1.6-.9-4.3-2.7-5.9-4.6-.2-.2-.5-.3-.8-.1-.3.2-.3.5-.1.8 1.9 2.3 5.2 4.6 7.9 4.6 5.1 0 9.3-3.6 9.3-8zm-14.6 2.3c-.4 0-.7-.3-.7-.7V9.3c0-.4.3-.7.7-.7s.7.3.7.7v1.6h1.6c.4 0 .7.3.7.7s-.3.7-.7.7h-2.3zm4.2 0c-.4 0-.7-.3-.7-.7V9.3c0-.4.3-.7.7-.7s.7.3.7.7v2.3c0 .4.3.7.7.7zm4.2 0c-.4 0-.7-.3-.7-.7V9.3c0-.4.3-.7.7-.7s.7.3.7.7v1.2l-1.7-1.9c-.2-.2-.4-.3-.6-.3-.4 0-.7.3-.7.7v2.3c0 .4.3.7.7.7s.7-.3.7-.7v-1.2l1.7 1.9c.2.2.4.3.6.3.4 0 .7-.3.7-.7zm4.2 0c-.4 0-.7-.3-.7-.7V9.3c0-.4.3-.7.7-.7s.7.3.7.7v1.6h1.6c.4 0 .7.3.7.7s-.3.7-.7.7h-2.3z" />
-  </svg>
-);
+import { Loader2, Share2, Facebook, Instagram } from "lucide-react";
 
 interface Remedy {
   id: number;
@@ -34,9 +27,29 @@ export function SharePreviewModal({ isOpen, onClose, remedy }: SharePreviewModal
   const shareUrl = window.location.href;
   const shareText = `我抽到了「${remedy.name_zh}」，它給我的指引是：${remedy.positive}\n\n✨ 牟尼巴哈花精指引 ✨\n${shareUrl}`;
 
-  const handleLineShare = () => {
-    const url = `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`;
-    window.open(url, '_blank');
+  const handleInstagramShare = async () => {
+    // Copy text to clipboard
+    try {
+      await navigator.clipboard.writeText(shareText);
+      alert('已複製指引文字！即將開啟 Instagram，您可以直接貼上分享。');
+      
+      // Try to open Instagram app or website
+      // Note: Instagram doesn't support direct text sharing via URL scheme like Line/FB
+      // So we just open the app/site
+      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+      if (isMobile) {
+        window.location.href = 'instagram://story-camera';
+        // Fallback to web if app not installed (after a short delay)
+        setTimeout(() => {
+          window.open('https://www.instagram.com/', '_blank');
+        }, 500);
+      } else {
+        window.open('https://www.instagram.com/', '_blank');
+      }
+    } catch (err) {
+      console.error('Failed to copy text: ', err);
+      alert('複製失敗，請手動複製文字後分享。');
+    }
   };
 
   const handleFacebookShare = () => {
@@ -119,11 +132,11 @@ export function SharePreviewModal({ isOpen, onClose, remedy }: SharePreviewModal
           <div className="w-full max-w-xs space-y-3">
             <div className="grid grid-cols-2 gap-3">
               <Button 
-                onClick={handleLineShare}
-                className="bg-[#06C755] hover:bg-[#05b34c] text-white rounded-full h-12 text-base font-medium"
+                onClick={handleInstagramShare}
+                className="bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] hover:opacity-90 text-white rounded-full h-12 text-base font-medium"
               >
-                <LineIcon className="mr-2 h-5 w-5" />
-                Line 分享
+                <Instagram className="mr-2 h-5 w-5" />
+                IG 分享
               </Button>
               <Button 
                 onClick={handleFacebookShare}
