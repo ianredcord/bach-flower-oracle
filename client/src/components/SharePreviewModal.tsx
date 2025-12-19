@@ -34,8 +34,6 @@ export function SharePreviewModal({ isOpen, onClose, remedy }: SharePreviewModal
       alert('已複製指引文字！即將開啟 Instagram，您可以直接貼上分享。');
       
       // Try to open Instagram app or website
-      // Note: Instagram doesn't support direct text sharing via URL scheme like Line/FB
-      // So we just open the app/site
       const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
       if (isMobile) {
         window.location.href = 'instagram://story-camera';
@@ -52,9 +50,27 @@ export function SharePreviewModal({ isOpen, onClose, remedy }: SharePreviewModal
     }
   };
 
-  const handleFacebookShare = () => {
-    const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}&quote=${encodeURIComponent(shareText)}`;
-    window.open(url, '_blank');
+  const handleFacebookShare = async () => {
+    // Copy text to clipboard
+    try {
+      await navigator.clipboard.writeText(shareText);
+      alert('已複製指引文字！即將開啟 Facebook，您可以直接貼上分享。');
+      
+      // Try to open Facebook app or website
+      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+      if (isMobile) {
+        window.location.href = 'fb://composer';
+        // Fallback to web if app not installed (after a short delay)
+        setTimeout(() => {
+          window.open('https://www.facebook.com/', '_blank');
+        }, 500);
+      } else {
+        window.open('https://www.facebook.com/', '_blank');
+      }
+    } catch (err) {
+      console.error('Failed to copy text: ', err);
+      alert('複製失敗，請手動複製文字後分享。');
+    }
   };
 
   const handleImageShare = async () => {
