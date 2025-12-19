@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { FlowerIcon } from "./FlowerIcon";
 import { motion } from "framer-motion";
 
 interface CardProps {
@@ -68,7 +69,7 @@ export function Card({ id, index, isSelected, isRevealed, onClick, content }: Ca
               </div>
               
               <div className="my-4 flex-grow flex items-center justify-center">
-                <img src="/images/flower-icon-v2.png" alt="Flower" className="w-24 h-24 mx-auto opacity-80" />
+                <FlowerIcon remedyId={id} className="w-32 h-32 mx-auto text-primary/80" />
               </div>
 
               <div className="space-y-4 mb-2">
