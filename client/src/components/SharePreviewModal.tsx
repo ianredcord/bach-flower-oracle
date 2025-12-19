@@ -23,6 +23,7 @@ interface SharePreviewModalProps {
 export function SharePreviewModal({ isOpen, onClose, remedy }: SharePreviewModalProps) {
   const shareCardRef = useRef<HTMLDivElement>(null);
   const [isGenerating, setIsGenerating] = useState(false);
+  const [isFbGenerating, setIsFbGenerating] = useState(false);
 
   const shareUrl = window.location.href;
   const shareText = `我抽到了「${remedy.name_zh}」，它給我的指引是：${remedy.positive}\n\n✨ 牟尼巴哈花精指引 ✨\n${shareUrl}`;
@@ -51,25 +52,60 @@ export function SharePreviewModal({ isOpen, onClose, remedy }: SharePreviewModal
   };
 
   const handleFacebookShare = async () => {
-    // Copy text to clipboard
+    if (!shareCardRef.current) return;
+    
+    setIsFbGenerating(true);
+    
     try {
-      await navigator.clipboard.writeText(shareText);
-      alert('已複製指引文字！即將開啟 Facebook，您可以直接貼上分享。');
-      
-      // Try to open Facebook app or website
-      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-      if (isMobile) {
-        window.location.href = 'fb://composer';
-        // Fallback to web if app not installed (after a short delay)
-        setTimeout(() => {
-          window.open('https://www.facebook.com/', '_blank');
-        }, 500);
+      // 1. Generate Image
+      try {
+        await Promise.race([
+          document.fonts.ready,
+          new Promise((_, reject) => setTimeout(() => reject(new Error('Font load timeout')), 2000))
+        ]);
+      } catch (e) {
+        console.warn('Font loading timed out, proceeding anyway');
+      }
+
+      const dataUrl = await Promise.race([
+        toPng(shareCardRef.current, {
+          quality: 0.8,
+          backgroundColor: '#F9F7F2',
+          cacheBust: true,
+          pixelRatio: 1,
+          filter: (node) => !node.classList?.contains('exclude-from-capture'),
+        }),
+        new Promise<string>((_, reject) => setTimeout(() => reject(new Error('Image generation timeout')), 5000))
+      ]);
+
+      const res = await fetch(dataUrl);
+      const blob = await res.blob();
+      const fileName = `bach-flower-${remedy.name_en.toLowerCase().replace(/\s+/g, '-')}.png`;
+      const file = new File([blob], fileName, { type: 'image/png' });
+
+      // 2. Try Web Share API (Mobile)
+      if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+        await navigator.share({
+          files: [file],
+          // Facebook often ignores text when sharing files, but we include it just in case
+          // or for other apps if user selects them from the share sheet
+        });
       } else {
+        // 3. Fallback for Desktop: Download image + Open Facebook
+        const link = document.createElement('a');
+        link.download = fileName;
+        link.href = dataUrl;
+        link.click();
+        
+        alert('圖片已下載！即將開啟 Facebook，請手動上傳圖片分享。');
         window.open('https://www.facebook.com/', '_blank');
       }
-    } catch (err) {
-      console.error('Failed to copy text: ', err);
-      alert('複製失敗，請手動複製文字後分享。');
+    } catch (error) {
+      console.error('FB Share failed:', error);
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      alert(`分享失敗 (${errorMessage})，請嘗試使用下方「下載/分享圖片」按鈕。`);
+    } finally {
+      setIsFbGenerating(false);
     }
   };
 
@@ -156,9 +192,14 @@ export function SharePreviewModal({ isOpen, onClose, remedy }: SharePreviewModal
               </Button>
               <Button 
                 onClick={handleFacebookShare}
+                disabled={isFbGenerating}
                 className="bg-[#1877F2] hover:bg-[#166fe5] text-white rounded-full h-12 text-base font-medium"
               >
-                <Facebook className="mr-2 h-5 w-5" />
+                {isFbGenerating ? (
+                  <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                ) : (
+                  <Facebook className="mr-2 h-5 w-5" />
+                )}
                 FB 分享
               </Button>
             </div>
