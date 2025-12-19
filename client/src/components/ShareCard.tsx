@@ -21,7 +21,12 @@ export const ShareCard = forwardRef<HTMLDivElement, ShareCardProps>(({ remedy },
       >
       {/* Background Elements */}
       <div className="absolute top-0 left-0 w-full h-full opacity-30 pointer-events-none">
-        <img src="/images/hero-bg.png" alt="" className="w-full h-full object-cover" />
+        <img 
+          src="/images/hero-bg.png" 
+          alt="" 
+          className="w-full h-full object-cover" 
+          crossOrigin="anonymous"
+        />
       </div>
       
       {/* Header */}
@@ -40,7 +45,12 @@ export const ShareCard = forwardRef<HTMLDivElement, ShareCardProps>(({ remedy },
           <p className="text-4xl text-[#8C9E8C] italic font-serif mb-12">{remedy.name_en}</p>
           
           <div className="w-48 h-48 mb-12 opacity-90">
-            <img src="/images/flower-icon-v2.png" alt="Flower" className="w-full h-full object-contain" />
+            <img 
+              src="/images/flower-icon-v2.png" 
+              alt="Flower" 
+              className="w-full h-full object-contain" 
+              crossOrigin="anonymous"
+            />
           </div>
 
           <div className="text-center space-y-6 w-full px-8">
