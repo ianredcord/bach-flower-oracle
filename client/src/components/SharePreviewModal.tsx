@@ -71,11 +71,11 @@ export function SharePreviewModal({ isOpen, onClose, remedy }: SharePreviewModal
         toPng(shareCardRef.current, {
           quality: 0.8,
           backgroundColor: '#F9F7F2',
-          cacheBust: true,
+          // cacheBust: true, // Removed to prevent reloading issues
           pixelRatio: 1,
           filter: (node) => !node.classList?.contains('exclude-from-capture'),
         }),
-        new Promise<string>((_, reject) => setTimeout(() => reject(new Error('Image generation timeout')), 5000))
+        new Promise<string>((_, reject) => setTimeout(() => reject(new Error('Image generation timeout')), 10000)) // Extended timeout to 10s
       ]);
 
       const res = await fetch(dataUrl);
@@ -85,11 +85,19 @@ export function SharePreviewModal({ isOpen, onClose, remedy }: SharePreviewModal
 
       // 2. Try Web Share API (Mobile)
       if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
-        await navigator.share({
-          files: [file],
-          // Facebook often ignores text when sharing files, but we include it just in case
-          // or for other apps if user selects them from the share sheet
-        });
+        try {
+          await navigator.share({
+            files: [file],
+          });
+        } catch (shareError) {
+          // If share is cancelled or fails, fallback to download
+          console.warn('Share cancelled or failed, falling back to download', shareError);
+          const link = document.createElement('a');
+          link.download = fileName;
+          link.href = dataUrl;
+          link.click();
+          alert('分享已取消或失敗，圖片已自動下載。');
+        }
       } else {
         // 3. Fallback for Desktop: Download image + Open Facebook
         const link = document.createElement('a');
@@ -130,11 +138,11 @@ export function SharePreviewModal({ isOpen, onClose, remedy }: SharePreviewModal
         toPng(shareCardRef.current, {
           quality: 0.8,
           backgroundColor: '#F9F7F2',
-          cacheBust: true,
+          // cacheBust: true, // Removed to prevent reloading issues
           pixelRatio: 1,
           filter: (node) => !node.classList?.contains('exclude-from-capture'),
         }),
-        new Promise<string>((_, reject) => setTimeout(() => reject(new Error('Image generation timeout')), 5000))
+        new Promise<string>((_, reject) => setTimeout(() => reject(new Error('Image generation timeout')), 10000)) // Extended timeout to 10s
       ]);
 
       const res = await fetch(dataUrl);
@@ -144,11 +152,21 @@ export function SharePreviewModal({ isOpen, onClose, remedy }: SharePreviewModal
 
       // Check if Web Share API is supported
       if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
-        await navigator.share({
-          title: '牟尼巴哈花精指引',
-          text: `我抽到了「${remedy.name_zh}」，它給我的指引是：${remedy.positive}`,
-          files: [file],
-        });
+        try {
+          await navigator.share({
+            title: '牟尼巴哈花精指引',
+            text: `我抽到了「${remedy.name_zh}」，它給我的指引是：${remedy.positive}`,
+            files: [file],
+          });
+        } catch (shareError) {
+           // If share is cancelled or fails, fallback to download
+           console.warn('Share cancelled or failed, falling back to download', shareError);
+           const link = document.createElement('a');
+           link.download = fileName;
+           link.href = dataUrl;
+           link.click();
+           alert('分享已取消或失敗，圖片已自動下載。');
+        }
       } else {
         // Fallback to download
         const link = document.createElement('a');
