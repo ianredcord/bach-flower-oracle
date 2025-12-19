@@ -57,53 +57,47 @@ export function SharePreviewModal({ isOpen, onClose, remedy }: SharePreviewModal
     setIsFbGenerating(true);
     
     try {
-      // 1. Generate Image
-      try {
-        await Promise.race([
-          document.fonts.ready,
-          new Promise((_, reject) => setTimeout(() => reject(new Error('Font load timeout')), 2000))
-        ]);
-      } catch (e) {
-        console.warn('Font loading timed out, proceeding anyway');
-      }
+      // 1. Wait a bit for rendering
+      await new Promise(resolve => setTimeout(resolve, 500));
 
-      const dataUrl = await Promise.race([
-        toPng(shareCardRef.current, {
-          quality: 0.8,
-          backgroundColor: '#F9F7F2',
-          // cacheBust: true, // Removed to prevent reloading issues
-          pixelRatio: 1,
-          filter: (node) => !node.classList?.contains('exclude-from-capture'),
-        }),
-        new Promise<string>((_, reject) => setTimeout(() => reject(new Error('Image generation timeout')), 10000)) // Extended timeout to 10s
-      ]);
+      // 2. Generate Image (Simplified)
+      const dataUrl = await toPng(shareCardRef.current, {
+        quality: 0.8,
+        backgroundColor: '#F9F7F2',
+        pixelRatio: 1,
+        filter: (node) => !node.classList?.contains('exclude-from-capture'),
+      });
 
       const res = await fetch(dataUrl);
       const blob = await res.blob();
       const fileName = `bach-flower-${remedy.name_en.toLowerCase().replace(/\s+/g, '-')}.png`;
       const file = new File([blob], fileName, { type: 'image/png' });
 
-      // 2. Try Web Share API (Mobile)
+      // 3. Try Web Share API (Mobile)
       if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
         try {
           await navigator.share({
             files: [file],
           });
         } catch (shareError) {
-          // If share is cancelled or fails, fallback to download
           console.warn('Share cancelled or failed, falling back to download', shareError);
+          // Force download
           const link = document.createElement('a');
           link.download = fileName;
           link.href = dataUrl;
+          document.body.appendChild(link);
           link.click();
+          document.body.removeChild(link);
           alert('分享已取消或失敗，圖片已自動下載。');
         }
       } else {
-        // 3. Fallback for Desktop: Download image + Open Facebook
+        // 4. Fallback for Desktop: Download image + Open Facebook
         const link = document.createElement('a');
         link.download = fileName;
         link.href = dataUrl;
+        document.body.appendChild(link);
         link.click();
+        document.body.removeChild(link);
         
         alert('圖片已下載！即將開啟 Facebook，請手動上傳圖片分享。');
         window.open('https://www.facebook.com/', '_blank');
@@ -123,34 +117,23 @@ export function SharePreviewModal({ isOpen, onClose, remedy }: SharePreviewModal
     setIsGenerating(true);
     
     try {
-      // Wait for fonts with timeout
-      try {
-        await Promise.race([
-          document.fonts.ready,
-          new Promise((_, reject) => setTimeout(() => reject(new Error('Font load timeout')), 2000))
-        ]);
-      } catch (e) {
-        console.warn('Font loading timed out, proceeding anyway');
-      }
+      // 1. Wait a bit for rendering
+      await new Promise(resolve => setTimeout(resolve, 500));
 
-      // Generate image with timeout
-      const dataUrl = await Promise.race([
-        toPng(shareCardRef.current, {
-          quality: 0.8,
-          backgroundColor: '#F9F7F2',
-          // cacheBust: true, // Removed to prevent reloading issues
-          pixelRatio: 1,
-          filter: (node) => !node.classList?.contains('exclude-from-capture'),
-        }),
-        new Promise<string>((_, reject) => setTimeout(() => reject(new Error('Image generation timeout')), 10000)) // Extended timeout to 10s
-      ]);
+      // 2. Generate Image (Simplified)
+      const dataUrl = await toPng(shareCardRef.current, {
+        quality: 0.8,
+        backgroundColor: '#F9F7F2',
+        pixelRatio: 1,
+        filter: (node) => !node.classList?.contains('exclude-from-capture'),
+      });
 
       const res = await fetch(dataUrl);
       const blob = await res.blob();
       const fileName = `bach-flower-${remedy.name_en.toLowerCase().replace(/\s+/g, '-')}.png`;
       const file = new File([blob], fileName, { type: 'image/png' });
 
-      // Check if Web Share API is supported
+      // 3. Try Web Share API
       if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
         try {
           await navigator.share({
@@ -159,20 +142,24 @@ export function SharePreviewModal({ isOpen, onClose, remedy }: SharePreviewModal
             files: [file],
           });
         } catch (shareError) {
-           // If share is cancelled or fails, fallback to download
            console.warn('Share cancelled or failed, falling back to download', shareError);
+           // Force download
            const link = document.createElement('a');
            link.download = fileName;
            link.href = dataUrl;
+           document.body.appendChild(link);
            link.click();
+           document.body.removeChild(link);
            alert('分享已取消或失敗，圖片已自動下載。');
         }
       } else {
-        // Fallback to download
+        // 4. Fallback to download
         const link = document.createElement('a');
         link.download = fileName;
         link.href = dataUrl;
+        document.body.appendChild(link);
         link.click();
+        document.body.removeChild(link);
       }
     } catch (error) {
       console.error('Image generation/share failed:', error);
