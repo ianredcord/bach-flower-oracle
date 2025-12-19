@@ -1,13 +1,48 @@
 import { QRCodeSVG } from 'qrcode.react';
-import { forwardRef } from 'react';
+import { forwardRef, useEffect, useState } from 'react';
 import { Remedy } from '../data/types';
 
 interface ShareCardProps {
   remedy: Remedy;
 }
 
+// Helper to convert image URL to Base64
+const toBase64 = (url: string): Promise<string> => {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.crossOrigin = 'Anonymous';
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      canvas.width = img.width;
+      canvas.height = img.height;
+      const ctx = canvas.getContext('2d');
+      if (ctx) {
+        ctx.drawImage(img, 0, 0);
+        resolve(canvas.toDataURL('image/png'));
+      } else {
+        reject(new Error('Canvas context is null'));
+      }
+    };
+    img.onerror = (error) => reject(error);
+    img.src = url;
+  });
+};
+
 export const ShareCard = forwardRef<HTMLDivElement, ShareCardProps>(({ remedy }, ref) => {
   const currentUrl = window.location.href;
+  const [flowerIconBase64, setFlowerIconBase64] = useState<string>('');
+  const [bgBase64, setBgBase64] = useState<string>('');
+
+  useEffect(() => {
+    // Pre-load images as Base64 to avoid CORS issues during capture
+    toBase64('/images/flower-icon-v2.png')
+      .then(setFlowerIconBase64)
+      .catch(err => console.error('Failed to load flower icon:', err));
+      
+    toBase64('/images/hero-bg.png')
+      .then(setBgBase64)
+      .catch(err => console.error('Failed to load bg:', err));
+  }, []);
 
   return (
       <div
@@ -21,12 +56,13 @@ export const ShareCard = forwardRef<HTMLDivElement, ShareCardProps>(({ remedy },
       >
       {/* Background Elements */}
       <div className="absolute top-0 left-0 w-full h-full opacity-30 pointer-events-none">
-        <img 
-          src="/images/hero-bg.png" 
-          alt="" 
-          className="w-full h-full object-cover" 
-          crossOrigin="anonymous"
-        />
+        {bgBase64 && (
+          <img 
+            src={bgBase64} 
+            alt="" 
+            className="w-full h-full object-cover" 
+          />
+        )}
       </div>
       
       {/* Header */}
@@ -45,12 +81,13 @@ export const ShareCard = forwardRef<HTMLDivElement, ShareCardProps>(({ remedy },
           <p className="text-4xl text-[#8C9E8C] italic font-serif mb-12">{remedy.name_en}</p>
           
           <div className="w-48 h-48 mb-12 opacity-90">
-            <img 
-              src="/images/flower-icon-v2.png" 
-              alt="Flower" 
-              className="w-full h-full object-contain" 
-              crossOrigin="anonymous"
-            />
+            {flowerIconBase64 && (
+              <img 
+                src={flowerIconBase64} 
+                alt="Flower" 
+                className="w-full h-full object-contain" 
+              />
+            )}
           </div>
 
           <div className="text-center space-y-6 w-full px-8">
