@@ -5,6 +5,7 @@ import { Remedy } from '../data/types';
 
 interface ShareCardProps {
   remedy: Remedy;
+  onImageReady?: () => void;
 }
 
 // Helper to convert image URL to Base64
@@ -29,7 +30,7 @@ const toBase64 = (url: string): Promise<string> => {
   });
 };
 
-export const ShareCard = forwardRef<HTMLDivElement, ShareCardProps>(({ remedy }, ref) => {
+export const ShareCard = forwardRef<HTMLDivElement, ShareCardProps>(({ remedy, onImageReady }, ref) => {
   const currentUrl = window.location.href;
   const [bgBase64, setBgBase64] = useState<string>('');
   const [flowerBase64, setFlowerBase64] = useState<string>('');
@@ -42,9 +43,16 @@ export const ShareCard = forwardRef<HTMLDivElement, ShareCardProps>(({ remedy },
 
     // Pre-load flower image as Base64
     toBase64(`/images/flowers/${remedy.id}.png`)
-      .then(setFlowerBase64)
+      .then((base64) => {
+        setFlowerBase64(base64);
+        // Notify parent that images are ready
+        if (onImageReady) {
+          // Add a small delay to ensure React has rendered the image
+          setTimeout(onImageReady, 100);
+        }
+      })
       .catch(err => console.error('Failed to load flower:', err));
-  }, [remedy.id]);
+  }, [remedy.id, onImageReady]);
 
   return (
       <div

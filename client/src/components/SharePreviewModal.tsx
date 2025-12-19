@@ -24,6 +24,7 @@ export function SharePreviewModal({ isOpen, onClose, remedy }: SharePreviewModal
   const shareCardRef = useRef<HTMLDivElement>(null);
   const [isGenerating, setIsGenerating] = useState(false);
   const [isFbGenerating, setIsFbGenerating] = useState(false);
+  const [isImageReady, setIsImageReady] = useState(false);
 
   const shareUrl = window.location.href;
   const shareText = `我抽到了「${remedy.name_zh}」，它給我的指引是：${remedy.positive}\n\n✨ 牟尼巴哈花精指引 ✨\n${shareUrl}`;
@@ -53,6 +54,10 @@ export function SharePreviewModal({ isOpen, onClose, remedy }: SharePreviewModal
 
   const handleFacebookShare = async () => {
     if (!shareCardRef.current) return;
+    if (!isImageReady) {
+      alert('請稍候，圖片正在載入中...');
+      return;
+    }
     
     setIsFbGenerating(true);
     
@@ -113,6 +118,10 @@ export function SharePreviewModal({ isOpen, onClose, remedy }: SharePreviewModal
 
   const handleImageShare = async () => {
     if (!shareCardRef.current) return;
+    if (!isImageReady) {
+      alert('請稍候，圖片正在載入中...');
+      return;
+    }
     
     setIsGenerating(true);
     
@@ -181,7 +190,10 @@ export function SharePreviewModal({ isOpen, onClose, remedy }: SharePreviewModal
           {/* Preview Area */}
           <div className="relative shadow-xl rounded-xl overflow-hidden transform scale-90 sm:scale-100 origin-top">
             <div ref={shareCardRef}>
-              <ShareCard remedy={remedy} />
+              <ShareCard 
+                remedy={remedy} 
+                onImageReady={() => setIsImageReady(true)}
+              />
             </div>
           </div>
 
@@ -197,7 +209,7 @@ export function SharePreviewModal({ isOpen, onClose, remedy }: SharePreviewModal
               </Button>
               <Button 
                 onClick={handleFacebookShare}
-                disabled={isFbGenerating}
+                disabled={isFbGenerating || !isImageReady}
                 className="bg-[#1877F2] hover:bg-[#166fe5] text-white rounded-full h-12 text-base font-medium"
               >
                 {isFbGenerating ? (
@@ -220,7 +232,7 @@ export function SharePreviewModal({ isOpen, onClose, remedy }: SharePreviewModal
 
             <Button 
               onClick={handleImageShare} 
-              disabled={isGenerating}
+              disabled={isGenerating || !isImageReady}
               variant="outline"
               className="w-full border-primary text-primary hover:bg-primary/5 rounded-full h-12 text-base font-serif"
             >
