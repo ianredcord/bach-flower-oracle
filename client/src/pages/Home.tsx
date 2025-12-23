@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "wouter";
 import { Card } from "@/components/Card";
 import { AudioPlayer } from "@/components/AudioPlayer";
 import { ShareCard } from "@/components/ShareCard";
@@ -201,7 +202,12 @@ export default function Home() {
         )}
 
         {/* Footer Info */}
-        <footer className="mt-auto py-8 text-center text-stone-400 text-sm font-light">
+        <footer className="mt-auto py-8 text-center text-stone-400 text-sm font-light flex flex-col items-center gap-4">
+          <Link href="/encyclopedia">
+            <a className="text-primary hover:text-primary/80 transition-colors font-serif border-b border-primary/30 pb-0.5 hover:border-primary">
+              瀏覽花精百科
+            </a>
+          </Link>
           <p>© 2025 Bach Flower Oracle. Designed for Inner Peace.</p>
         </footer>
       </main>
