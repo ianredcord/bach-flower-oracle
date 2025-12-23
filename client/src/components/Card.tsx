@@ -13,6 +13,11 @@ interface CardProps {
     name_en: string;
     emotion: string;
     positive: string;
+    product?: {
+      name: string;
+      description: string;
+      url: string;
+    };
   };
 }
 
@@ -37,7 +42,7 @@ export function Card({ id, index, isSelected, isRevealed, onClick, content }: Ca
       className={cn(
         "relative cursor-pointer perspective-1000 transition-all duration-500",
         isRevealed 
-          ? "w-72 h-[28rem] sm:w-80 sm:h-[30rem]" 
+          ? "w-72 h-[36rem] sm:w-80 sm:h-[38rem]" 
           : "w-24 h-40 sm:w-32 sm:h-52",
         isSelected && !isRevealed && "shadow-xl scale-105"
       )}
@@ -89,6 +94,30 @@ export function Card({ id, index, isSelected, isRevealed, onClick, content }: Ca
                   <p className="text-xs text-primary uppercase tracking-wider mb-2 font-medium">正向轉化</p>
                   <p className="text-sm text-primary font-medium leading-relaxed">{content.positive}</p>
                 </div>
+
+                {content.product && (
+                  <a 
+                    href={content.product.url} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="block mt-4 group"
+                  >
+                    <div className="bg-gradient-to-r from-amber-50 to-orange-50 p-4 rounded-xl border border-amber-100 shadow-sm hover:shadow-md transition-all duration-300 group-hover:border-amber-200">
+                      <div className="flex items-center justify-between mb-2">
+                        <p className="text-xs text-amber-600 uppercase tracking-wider font-bold flex items-center gap-1">
+                          <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
+                          MUNI 能量推薦
+                        </p>
+                        <span className="text-[10px] bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full font-medium group-hover:bg-amber-200 transition-colors">
+                          立即購買 →
+                        </span>
+                      </div>
+                      <p className="text-xs text-stone-600 leading-relaxed group-hover:text-stone-800 transition-colors">
+                        {content.product.description}
+                      </p>
+                    </div>
+                  </a>
+                )}
               </div>
             </div>
           )}

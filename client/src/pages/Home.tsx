@@ -144,6 +144,22 @@ export default function Home() {
           </AnimatePresence>
         </div>
 
+        {/* Emergency Support Button */}
+        <div className="fixed bottom-8 right-8 z-40 hidden md:block">
+          <a 
+            href="https://www.stark.works/categories/muni%E7%89%9F%E5%B0%BC%E7%B2%BE%E6%B2%B9"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 bg-red-50 text-red-600 px-4 py-2 rounded-full shadow-md hover:shadow-lg hover:bg-red-100 transition-all duration-300 border border-red-100 group"
+          >
+            <span className="relative flex h-3 w-3">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+            </span>
+            <span className="font-medium text-sm tracking-wide group-hover:font-bold">SOS 急救花精</span>
+          </a>
+        </div>
+
         {/* Action Bar */}
         <div className="fixed bottom-8 z-50">
           <AnimatePresence>
@@ -200,6 +216,48 @@ export default function Home() {
             remedy={shuffledRemedies[selectedCards[0]]}
           />
         )}
+
+        {/* MUNI Product Showcase */}
+        <section className="w-full max-w-4xl mx-auto mt-20 mb-12 px-4">
+          <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-stone-100">
+            <div className="md:flex">
+              <div className="md:w-1/2 relative h-64 md:h-auto">
+                <img 
+                  src="https://shoplineimg.com/5d22e02e9a76f00001037345/619f42004240720023456360/800x.webp?source_format=jpg" 
+                  alt="MUNI 能量精油" 
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/20 to-transparent" />
+              </div>
+              <div className="md:w-1/2 p-8 md:p-12 flex flex-col justify-center bg-gradient-to-br from-stone-50 to-white">
+                <div className="mb-4">
+                  <span className="inline-block px-3 py-1 bg-amber-100 text-amber-800 text-xs font-bold tracking-wider rounded-full mb-3">
+                    品牌推薦
+                  </span>
+                  <h2 className="font-serif text-3xl font-bold text-stone-800 mb-2">MUNI 能量精油</h2>
+                  <p className="text-stone-500 italic font-serif">封存 40 種花精的療癒能量</p>
+                </div>
+                
+                <p className="text-stone-600 mb-6 leading-relaxed">
+                  MUNI 獨家研發，結合 38 種巴哈花精與 2 種急救花精的完整能量。
+                  不只是精油，更是您隨身的能量守護者，隨時為身心充電。
+                </p>
+                
+                <a 
+                  href="https://www.stark.works/categories/muni%E7%89%9F%E5%B0%BC%E7%B2%BE%E6%B2%B9" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center px-6 py-3 bg-stone-800 text-white rounded-lg hover:bg-stone-700 transition-colors duration-300 shadow-md hover:shadow-lg group"
+                >
+                  <span className="font-medium tracking-wide">探索全系列產品</span>
+                  <svg className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
 
         {/* Footer Info */}
         <footer className="mt-auto py-8 text-center text-stone-400 text-sm font-light flex flex-col items-center gap-4">

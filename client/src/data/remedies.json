@@ -34,6 +34,11 @@
       "id": "overcare",
       "name_zh": "過度關心別人",
       "name_en": "For Over-Care for Welfare of Others"
+    },
+    {
+      "id": "rescue",
+      "name_zh": "急救與淨化",
+      "name_en": "Rescue & Purification"
     }
   ],
   "remedies": [
@@ -43,7 +48,12 @@
       "name_zh": "岩玫瑰",
       "category": "fear",
       "emotion": "被恐懼和驚慌所淹沒",
-      "positive": "無畏與勇氣，面對危機時保持冷靜"
+      "positive": "無畏與勇氣，面對危機時保持冷靜",
+      "product": {
+        "name": "MUNI 能量精油",
+        "description": "岩玫瑰的勇氣能量，已完整封存於 MUNI 能量精油中，為您帶來面對危機的定力。",
+        "url": "https://www.stark.works/categories/muni%E7%89%9F%E5%B0%BC%E7%B2%BE%E6%B2%B9"
+      }
     },
     {
       "id": 2,
@@ -51,7 +61,12 @@
       "name_zh": "溝酸醬",
       "category": "fear",
       "emotion": "對已知事物的恐懼，害羞膽怯",
-      "positive": "勇敢面對恐懼，享受生活而不被擔憂困擾"
+      "positive": "勇敢面對恐懼，享受生活而不被擔憂困擾",
+      "product": {
+        "name": "MUNI 能量精油",
+        "description": "溝酸醬的無畏能量，已完整封存於 MUNI 能量精油中，助您勇敢面對生活挑戰。",
+        "url": "https://www.stark.works/categories/muni%E7%89%9F%E5%B0%BC%E7%B2%BE%E6%B2%B9"
+      }
     },
     {
       "id": 3,
@@ -59,7 +74,12 @@
       "name_zh": "櫻桃李",
       "category": "fear",
       "emotion": "害怕失去控制，精神緊繃到極點",
-      "positive": "勇氣與沉著，保持內心平靜"
+      "positive": "勇氣與沉著，保持內心平靜",
+      "product": {
+        "name": "MUNI 能量精油",
+        "description": "櫻桃李的平靜能量，已完整封存於 MUNI 能量精油中，助您找回內心的沉著。",
+        "url": "https://www.stark.works/categories/muni%E7%89%9F%E5%B0%BC%E7%B2%BE%E6%B2%B9"
+      }
     },
     {
       "id": 4,
@@ -67,7 +87,12 @@
       "name_zh": "白楊",
       "category": "fear",
       "emotion": "莫名的恐懼和不安，說不出原因的焦慮",
-      "positive": "無畏無懼，減少莫名的擔憂"
+      "positive": "無畏無懼，減少莫名的擔憂",
+      "product": {
+        "name": "MUNI 能量精油",
+        "description": "白楊的安撫能量，已完整封存於 MUNI 能量精油中，為您驅散莫名的不安。",
+        "url": "https://www.stark.works/categories/muni%E7%89%9F%E5%B0%BC%E7%B2%BE%E6%B2%B9"
+      }
     },
     {
       "id": 5,
@@ -75,7 +100,12 @@
       "name_zh": "紅栗花",
       "category": "fear",
       "emotion": "過度擔心所愛之人的安危",
-      "positive": "保持冷靜，維持正確的觀點"
+      "positive": "保持冷靜，維持正確的觀點",
+      "product": {
+        "name": "MUNI 能量精油",
+        "description": "紅栗花的守護能量，已完整封存於 MUNI 能量精油中，讓愛不再是負擔。",
+        "url": "https://www.stark.works/categories/muni%E7%89%9F%E5%B0%BC%E7%B2%BE%E6%B2%B9"
+      }
     },
     {
       "id": 6,
@@ -83,7 +113,12 @@
       "name_zh": "水蕨",
       "category": "uncertainty",
       "emotion": "懷疑自己的判斷，總是尋求他人意見",
-      "positive": "增強自信與智慧，相信自己的判斷"
+      "positive": "增強自信與智慧，相信自己的判斷",
+      "product": {
+        "name": "MUNI 能量精油",
+        "description": "水蕨的自信能量，已完整封存於 MUNI 能量精油中，助您聽見內在的聲音。",
+        "url": "https://www.stark.works/categories/muni%E7%89%9F%E5%B0%BC%E7%B2%BE%E6%B2%B9"
+      }
     },
     {
       "id": 7,
@@ -91,7 +126,12 @@
       "name_zh": "線球草",
       "category": "uncertainty",
       "emotion": "難以做決定，情緒起伏不定",
-      "positive": "快速做出決定並向前邁進"
+      "positive": "快速做出決定並向前邁進",
+      "product": {
+        "name": "MUNI 能量精油",
+        "description": "線球草的平衡能量，已完整封存於 MUNI 能量精油中，助您找回內心的定見。",
+        "url": "https://www.stark.works/categories/muni%E7%89%9F%E5%B0%BC%E7%B2%BE%E6%B2%B9"
+      }
     },
     {
       "id": 8,
@@ -99,7 +139,12 @@
       "name_zh": "龍膽",
       "category": "uncertainty",
       "emotion": "遇到挫折後感到沮喪和氣餒",
-      "positive": "不受挫折影響，保持正向態度"
+      "positive": "不受挫折影響，保持正向態度",
+      "product": {
+        "name": "MUNI 能量精油",
+        "description": "龍膽的堅毅能量，已完整封存於 MUNI 能量精油中，助您在挫折中看見希望。",
+        "url": "https://www.stark.works/categories/muni%E7%89%9F%E5%B0%BC%E7%B2%BE%E6%B2%B9"
+      }
     },
     {
       "id": 9,
@@ -107,7 +152,12 @@
       "name_zh": "荊豆",
       "category": "uncertainty",
       "emotion": "感到絕望，看不到希望",
-      "positive": "重燃希望、信念與內在力量"
+      "positive": "重燃希望、信念與內在力量",
+      "product": {
+        "name": "MUNI 能量精油",
+        "description": "荊豆的希望能量，已完整封存於 MUNI 能量精油中，為您點亮生命的光芒。",
+        "url": "https://www.stark.works/categories/muni%E7%89%9F%E5%B0%BC%E7%B2%BE%E6%B2%B9"
+      }
     },
     {
       "id": 10,
@@ -115,7 +165,12 @@
       "name_zh": "鵝耳櫪",
       "category": "uncertainty",
       "emotion": "想到任務就感到心理疲憊，缺乏動力",
-      "positive": "精神振奮，對自己的能力充滿信心"
+      "positive": "精神振奮，對自己的能力充滿信心",
+      "product": {
+        "name": "MUNI 能量精油",
+        "description": "鵝耳櫪的活力能量，已完整封存於 MUNI 能量精油中，助您找回生活的動力。",
+        "url": "https://www.stark.works/categories/muni%E7%89%9F%E5%B0%BC%E7%B2%BE%E6%B2%B9"
+      }
     },
     {
       "id": 11,
@@ -123,7 +178,12 @@
       "name_zh": "野燕麥",
       "category": "uncertainty",
       "emotion": "感到不滿足，找不到人生方向",
-      "positive": "清楚看見自己想要的人生道路"
+      "positive": "清楚看見自己想要的人生道路",
+      "product": {
+        "name": "MUNI 能量精油",
+        "description": "野燕麥的指引能量，已完整封存於 MUNI 能量精油中，助您釐清人生的方向。",
+        "url": "https://www.stark.works/categories/muni%E7%89%9F%E5%B0%BC%E7%B2%BE%E6%B2%B9"
+      }
     },
     {
       "id": 12,
@@ -131,7 +191,12 @@
       "name_zh": "鐵線蓮",
       "category": "present",
       "emotion": "白日夢者，心不在焉，活在幻想中",
-      "positive": "對萬事萬物充滿興趣，掌控自己的思緒"
+      "positive": "對萬事萬物充滿興趣，掌控自己的思緒",
+      "product": {
+        "name": "MUNI 能量精油",
+        "description": "鐵線蓮的落實能量，已完整封存於 MUNI 能量精油中，助您將夢想化為現實。",
+        "url": "https://www.stark.works/categories/muni%E7%89%9F%E5%B0%BC%E7%B2%BE%E6%B2%B9"
+      }
     },
     {
       "id": 13,
@@ -139,7 +204,12 @@
       "name_zh": "忍冬",
       "category": "present",
       "emotion": "沉溺於過去的回憶，無法放下",
-      "positive": "珍惜過去的美好，但活在當下"
+      "positive": "珍惜過去的美好，但活在當下",
+      "product": {
+        "name": "MUNI 能量精油",
+        "description": "忍冬的當下能量，已完整封存於 MUNI 能量精油中，助您擁抱此刻的美好。",
+        "url": "https://www.stark.works/categories/muni%E7%89%9F%E5%B0%BC%E7%B2%BE%E6%B2%B9"
+      }
     },
     {
       "id": 14,
@@ -147,7 +217,12 @@
       "name_zh": "野玫瑰",
       "category": "present",
       "emotion": "對生活冷漠，缺乏熱情和動力",
-      "positive": "對生活充滿熱情與活力"
+      "positive": "對生活充滿熱情與活力",
+      "product": {
+        "name": "MUNI 能量精油",
+        "description": "野玫瑰的熱情能量，已完整封存於 MUNI 能量精油中，為您的生活注入活力。",
+        "url": "https://www.stark.works/categories/muni%E7%89%9F%E5%B0%BC%E7%B2%BE%E6%B2%B9"
+      }
     },
     {
       "id": 15,
@@ -155,7 +230,12 @@
       "name_zh": "橄欖",
       "category": "present",
       "emotion": "身心靈完全疲憊不堪",
-      "positive": "恢復精力，重新充滿活力"
+      "positive": "恢復精力，重新充滿活力",
+      "product": {
+        "name": "MUNI 能量精油",
+        "description": "橄欖的修復能量，已完整封存於 MUNI 能量精油中，為疲憊的身心充電。",
+        "url": "https://www.stark.works/categories/muni%E7%89%9F%E5%B0%BC%E7%B2%BE%E6%B2%B9"
+      }
     },
     {
       "id": 16,
@@ -163,7 +243,12 @@
       "name_zh": "白栗花",
       "category": "present",
       "emotion": "思緒無法停止，重複的念頭困擾著你",
-      "positive": "心靈平靜，思緒受到控制"
+      "positive": "心靈平靜，思緒受到控制",
+      "product": {
+        "name": "MUNI 能量精油",
+        "description": "白栗花的寧靜能量，已完整封存於 MUNI 能量精油中，助您平息紛亂的思緒。",
+        "url": "https://www.stark.works/categories/muni%E7%89%9F%E5%B0%BC%E7%B2%BE%E6%B2%B9"
+      }
     },
     {
       "id": 17,
@@ -171,7 +256,12 @@
       "name_zh": "芥子",
       "category": "present",
       "emotion": "莫名的憂鬱，不知原因的低落",
-      "positive": "內心寧靜與喜悅，不被動搖"
+      "positive": "內心寧靜與喜悅，不被動搖",
+      "product": {
+        "name": "MUNI 能量精油",
+        "description": "芥子的喜悅能量，已完整封存於 MUNI 能量精油中，為您驅散心頭的陰霾。",
+        "url": "https://www.stark.works/categories/muni%E7%89%9F%E5%B0%BC%E7%B2%BE%E6%B2%B9"
+      }
     },
     {
       "id": 18,
@@ -179,7 +269,12 @@
       "name_zh": "栗樹芽苞",
       "category": "present",
       "emotion": "重複犯同樣的錯誤，無法從經驗中學習",
-      "positive": "更好的洞察力、觀察力與智慧"
+      "positive": "更好的洞察力、觀察力與智慧",
+      "product": {
+        "name": "MUNI 能量精油",
+        "description": "栗樹芽苞的學習能量，已完整封存於 MUNI 能量精油中，助您從經驗中成長。",
+        "url": "https://www.stark.works/categories/muni%E7%89%9F%E5%B0%BC%E7%B2%BE%E6%B2%B9"
+      }
     },
     {
       "id": 19,
@@ -187,7 +282,12 @@
       "name_zh": "水蓳",
       "category": "loneliness",
       "emotion": "喜歡獨處，顯得冷漠或驕傲",
-      "positive": "與人連結，敞開心扉，不過度孤立"
+      "positive": "與人連結，敞開心扉，不過度孤立",
+      "product": {
+        "name": "MUNI 能量精油",
+        "description": "水蓳的連結能量，已完整封存於 MUNI 能量精油中，助您自在地與人交流。",
+        "url": "https://www.stark.works/categories/muni%E7%89%9F%E5%B0%BC%E7%B2%BE%E6%B2%B9"
+      }
     },
     {
       "id": 20,
@@ -195,7 +295,12 @@
       "name_zh": "鳳仙花",
       "category": "loneliness",
       "emotion": "對他人或事物的緩慢感到不耐煩",
-      "positive": "耐心，過著不那麼匆忙、更放鬆的生活"
+      "positive": "耐心，過著不那麼匆忙、更放鬆的生活",
+      "product": {
+        "name": "MUNI 能量精油",
+        "description": "鳳仙花的耐心能量，已完整封存於 MUNI 能量精油中，助您享受慢活的步調。",
+        "url": "https://www.stark.works/categories/muni%E7%89%9F%E5%B0%BC%E7%B2%BE%E6%B2%B9"
+      }
     },
     {
       "id": 21,
@@ -203,7 +308,12 @@
       "name_zh": "石南",
       "category": "loneliness",
       "emotion": "以自我為中心，總是談論自己",
-      "positive": "為他人著想，願意傾聽"
+      "positive": "為他人著想，願意傾聽",
+      "product": {
+        "name": "MUNI 能量精油",
+        "description": "石南的傾聽能量，已完整封存於 MUNI 能量精油中，助您建立真誠的關係。",
+        "url": "https://www.stark.works/categories/muni%E7%89%9F%E5%B0%BC%E7%B2%BE%E6%B2%B9"
+      }
     },
     {
       "id": 22,
@@ -211,7 +321,12 @@
       "name_zh": "龍芽草",
       "category": "sensitive",
       "emotion": "用微笑掩飾內心的煩惱和痛苦",
-      "positive": "能笑看問題，同時也能處理它們"
+      "positive": "能笑看問題，同時也能處理它們",
+      "product": {
+        "name": "MUNI 能量精油",
+        "description": "龍芽草的真實能量，已完整封存於 MUNI 能量精油中，助您坦然面對內心。",
+        "url": "https://www.stark.works/categories/muni%E7%89%9F%E5%B0%BC%E7%B2%BE%E6%B2%B9"
+      }
     },
     {
       "id": 23,
@@ -219,7 +334,12 @@
       "name_zh": "矢車菊",
       "category": "sensitive",
       "emotion": "容易被他人影響，無法說不",
-      "positive": "為自己挺身而出，更加堅定自信"
+      "positive": "為自己挺身而出，更加堅定自信",
+      "product": {
+        "name": "MUNI 能量精油",
+        "description": "矢車菊的堅定能量，已完整封存於 MUNI 能量精油中，助您建立健康的界線。",
+        "url": "https://www.stark.works/categories/muni%E7%89%9F%E5%B0%BC%E7%B2%BE%E6%B2%B9"
+      }
     },
     {
       "id": 24,
@@ -227,7 +347,12 @@
       "name_zh": "胡桃",
       "category": "sensitive",
       "emotion": "對變化或外界影響敏感",
-      "positive": "適應人生新階段，不受外界影響"
+      "positive": "適應人生新階段，不受外界影響",
+      "product": {
+        "name": "MUNI 能量精油",
+        "description": "胡桃的保護能量，已完整封存於 MUNI 能量精油中，助您堅定地走自己的路。",
+        "url": "https://www.stark.works/categories/muni%E7%89%9F%E5%B0%BC%E7%B2%BE%E6%B2%B9"
+      }
     },
     {
       "id": 25,
@@ -235,7 +360,12 @@
       "name_zh": "冬青",
       "category": "sensitive",
       "emotion": "對他人感到憤怒、嫉妒或怨恨",
-      "positive": "內心和諧，對他人充滿善意"
+      "positive": "內心和諧，對他人充滿善意",
+      "product": {
+        "name": "MUNI 能量精油",
+        "description": "冬青的寬恕能量，已完整封存於 MUNI 能量精油中，助您打開心門擁抱愛。",
+        "url": "https://www.stark.works/categories/muni%E7%89%9F%E5%B0%BC%E7%B2%BE%E6%B2%B9"
+      }
     },
     {
       "id": 26,
@@ -243,7 +373,12 @@
       "name_zh": "落葉松",
       "category": "despair",
       "emotion": "對自己的能力缺乏信心",
-      "positive": "對自己的能力充滿信心"
+      "positive": "對自己的能力充滿信心",
+      "product": {
+        "name": "MUNI 能量精油",
+        "description": "落葉松的自信能量，已完整封存於 MUNI 能量精油中，助您相信自己的潛能。",
+        "url": "https://www.stark.works/categories/muni%E7%89%9F%E5%B0%BC%E7%B2%BE%E6%B2%B9"
+      }
     },
     {
       "id": 27,
@@ -251,7 +386,12 @@
       "name_zh": "松樹",
       "category": "despair",
       "emotion": "感到內疚，總是責怪自己",
-      "positive": "以公平平衡的方式承擔責任"
+      "positive": "以公平平衡的方式承擔責任",
+      "product": {
+        "name": "MUNI 能量精油",
+        "description": "松樹的接納能量，已完整封存於 MUNI 能量精油中，助您放下不必要的自責。",
+        "url": "https://www.stark.works/categories/muni%E7%89%9F%E5%B0%BC%E7%B2%BE%E6%B2%B9"
+      }
     },
     {
       "id": 28,
@@ -259,7 +399,12 @@
       "name_zh": "榆樹",
       "category": "despair",
       "emotion": "被責任壓得喘不過氣",
-      "positive": "有能力、有效率，恢復信心"
+      "positive": "有能力、有效率，恢復信心",
+      "product": {
+        "name": "MUNI 能量精油",
+        "description": "榆樹的承擔能量，已完整封存於 MUNI 能量精油中，助您重拾信心與效率。",
+        "url": "https://www.stark.works/categories/muni%E7%89%9F%E5%B0%BC%E7%B2%BE%E6%B2%B9"
+      }
     },
     {
       "id": 29,
@@ -267,7 +412,12 @@
       "name_zh": "甜栗花",
       "category": "despair",
       "emotion": "看不到痛苦的盡頭，極度絕望",
-      "positive": "恢復希望，驅散悲傷"
+      "positive": "恢復希望，驅散悲傷",
+      "product": {
+        "name": "MUNI 能量精油",
+        "description": "甜栗花的轉化能量，已完整封存於 MUNI 能量精油中，助您穿越黑暗迎向光明。",
+        "url": "https://www.stark.works/categories/muni%E7%89%9F%E5%B0%BC%E7%B2%BE%E6%B2%B9"
+      }
     },
     {
       "id": 30,
@@ -275,7 +425,12 @@
       "name_zh": "聖星百合",
       "category": "despair",
       "emotion": "經歷負面事件後的創傷和震驚",
-      "positive": "撫慰傷痛，帶來安慰"
+      "positive": "撫慰傷痛，帶來安慰",
+      "product": {
+        "name": "MUNI 能量精油",
+        "description": "聖星百合的撫慰能量，已完整封存於 MUNI 能量精油中，為您療癒過往的傷痛。",
+        "url": "https://www.stark.works/categories/muni%E7%89%9F%E5%B0%BC%E7%B2%BE%E6%B2%B9"
+      }
     },
     {
       "id": 31,
@@ -283,7 +438,12 @@
       "name_zh": "楊柳",
       "category": "despair",
       "emotion": "怨恨和自憐，覺得生活不公平",
-      "positive": "樂觀，為自己的命運負全責"
+      "positive": "樂觀，為自己的命運負全責",
+      "product": {
+        "name": "MUNI 能量精油",
+        "description": "楊柳的樂觀能量，已完整封存於 MUNI 能量精油中，助您創造自己的命運。",
+        "url": "https://www.stark.works/categories/muni%E7%89%9F%E5%B0%BC%E7%B2%BE%E6%B2%B9"
+      }
     },
     {
       "id": 32,
@@ -291,7 +451,12 @@
       "name_zh": "橡樹",
       "category": "despair",
       "emotion": "過度工作和疲憊，但仍堅持不懈",
-      "positive": "了解自己的極限，在任何情況下保持穩定"
+      "positive": "了解自己的極限，在任何情況下保持穩定",
+      "product": {
+        "name": "MUNI 能量精油",
+        "description": "橡樹的韌性能量，已完整封存於 MUNI 能量精油中，助您在奮鬥中懂得休息。",
+        "url": "https://www.stark.works/categories/muni%E7%89%9F%E5%B0%BC%E7%B2%BE%E6%B2%B9"
+      }
     },
     {
       "id": 33,
@@ -299,7 +464,12 @@
       "name_zh": "海棠",
       "category": "despair",
       "emotion": "不喜歡自己身體或心靈的某些方面",
-      "positive": "控制思緒，接受自己"
+      "positive": "控制思緒，接受自己",
+      "product": {
+        "name": "MUNI 能量精油",
+        "description": "海棠的淨化能量，已完整封存於 MUNI 能量精油中，助您接納並喜愛自己。",
+        "url": "https://www.stark.works/categories/muni%E7%89%9F%E5%B0%BC%E7%B2%BE%E6%B2%B9"
+      }
     },
     {
       "id": 34,
@@ -307,7 +477,12 @@
       "name_zh": "菊苣",
       "category": "overcare",
       "emotion": "對所愛的人佔有慾強、自私或專橫",
-      "positive": "無私的愛，不求回報地付出"
+      "positive": "無私的愛，不求回報地付出",
+      "product": {
+        "name": "MUNI 能量精油",
+        "description": "菊苣的無私能量，已完整封存於 MUNI 能量精油中，助您給予自由的愛。",
+        "url": "https://www.stark.works/categories/muni%E7%89%9F%E5%B0%BC%E7%B2%BE%E6%B2%B9"
+      }
     },
     {
       "id": 35,
@@ -315,7 +490,12 @@
       "name_zh": "馬鞭草",
       "category": "overcare",
       "emotion": "熱情過度消耗自己，無法休息",
-      "positive": "能夠放鬆，接受他人的觀點"
+      "positive": "能夠放鬆，接受他人的觀點",
+      "product": {
+        "name": "MUNI 能量精油",
+        "description": "馬鞭草的放鬆能量，已完整封存於 MUNI 能量精油中，助您享受平衡的生活。",
+        "url": "https://www.stark.works/categories/muni%E7%89%9F%E5%B0%BC%E7%B2%BE%E6%B2%B9"
+      }
     },
     {
       "id": 36,
@@ -323,7 +503,12 @@
       "name_zh": "葡萄藤",
       "category": "overcare",
       "emotion": "喜歡掌控一切，專橫霸道",
-      "positive": "能夠啟發他人，成為明智體貼的領導者"
+      "positive": "能夠啟發他人，成為明智體貼的領導者",
+      "product": {
+        "name": "MUNI 能量精油",
+        "description": "葡萄藤的領導能量，已完整封存於 MUNI 能量精油中，助您成為溫暖的引導者。",
+        "url": "https://www.stark.works/categories/muni%E7%89%9F%E5%B0%BC%E7%B2%BE%E6%B2%B9"
+      }
     },
     {
       "id": 37,
@@ -331,7 +516,12 @@
       "name_zh": "山毛櫸",
       "category": "overcare",
       "emotion": "不寬容、愛批評、容易挑剔",
-      "positive": "對他人寬容和有同理心"
+      "positive": "對他人寬容和有同理心",
+      "product": {
+        "name": "MUNI 能量精油",
+        "description": "山毛櫸的包容能量，已完整封存於 MUNI 能量精油中，助您看見他人的美好。",
+        "url": "https://www.stark.works/categories/muni%E7%89%9F%E5%B0%BC%E7%B2%BE%E6%B2%B9"
+      }
     },
     {
       "id": 38,
@@ -339,7 +529,38 @@
       "name_zh": "岩水",
       "category": "overcare",
       "emotion": "過度完美主義和自我要求",
-      "positive": "對自己更加靈活，不那麼僵化"
+      "positive": "對自己更加靈活，不那麼僵化",
+      "product": {
+        "name": "MUNI 能量精油",
+        "description": "岩水的流動能量，已完整封存於 MUNI 能量精油中，助您享受生命的彈性。",
+        "url": "https://www.stark.works/categories/muni%E7%89%9F%E5%B0%BC%E7%B2%BE%E6%B2%B9"
+      }
+    },
+    {
+      "id": 39,
+      "name_en": "Comprehensive Rescue",
+      "name_zh": "綜合急救",
+      "category": "rescue",
+      "emotion": "突發的驚嚇、巨大的壓力、身心失衡、緊急狀況",
+      "positive": "迅速恢復平衡、鎮定安神、整合身心能量",
+      "product": {
+        "name": "MUNI 能量精油",
+        "description": "綜合急救的安神能量，已完整封存於 MUNI 能量精油中，為您帶來即時的平靜。",
+        "url": "https://www.stark.works/categories/muni%E7%89%9F%E5%B0%BC%E7%B2%BE%E6%B2%B9"
+      }
+    },
+    {
+      "id": 40,
+      "name_en": "Purification Rescue",
+      "name_zh": "淨化急救",
+      "category": "rescue",
+      "emotion": "感覺氣場混濁、受到負面能量干擾、身心沈重",
+      "positive": "清理負面磁場、保護能量場、恢復純淨與明亮",
+      "product": {
+        "name": "MUNI 能量精油",
+        "description": "淨化急救的清理能量，已完整封存於 MUNI 能量精油中，為您打造純淨的防護罩。",
+        "url": "https://www.stark.works/categories/muni%E7%89%9F%E5%B0%BC%E7%B2%BE%E6%B2%B9"
+      }
     }
   ]
 }
