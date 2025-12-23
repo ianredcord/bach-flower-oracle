@@ -223,7 +223,7 @@ export default function Home() {
             <div className="md:flex">
               <div className="md:w-1/2 relative h-64 md:h-auto">
                 <img 
-                  src="https://shoplineimg.com/5d22e02e9a76f00001037345/619f42004240720023456360/800x.webp?source_format=jpg" 
+                  src="/images/muni-product.jpg" 
                   alt="MUNI 能量精油" 
                   className="absolute inset-0 w-full h-full object-cover"
                 />
