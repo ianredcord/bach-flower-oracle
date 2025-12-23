@@ -7,12 +7,18 @@ import { Card, CardContent } from "@/components/ui/card";
 
 export default function Encyclopedia() {
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
-  const filteredRemedies = remediesData.remedies.filter((remedy) =>
-    remedy.name_zh.includes(searchTerm) ||
-    remedy.name_en.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    remedy.emotion.includes(searchTerm)
-  );
+  const filteredRemedies = remediesData.remedies.filter((remedy) => {
+    const matchesSearch = 
+      remedy.name_zh.includes(searchTerm) ||
+      remedy.name_en.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      remedy.emotion.includes(searchTerm);
+    
+    const matchesCategory = selectedCategory ? remedy.category === selectedCategory : true;
+
+    return matchesSearch && matchesCategory;
+  });
 
   return (
     <div className="min-h-screen bg-[#F9F7F2] text-stone-800 font-sans selection:bg-stone-200">
@@ -33,8 +39,37 @@ export default function Encyclopedia() {
             探索 38 種花精的自然療癒力量，了解每一朵花所帶來的正向轉化與心靈指引。
           </p>
 
-          {/* Search */}
-          <div className="relative w-full max-w-md">
+          {/* Filters */}
+          <div className="w-full max-w-4xl flex flex-col items-center space-y-6">
+            {/* Category Buttons */}
+            <div className="flex flex-wrap justify-center gap-2">
+              <button
+                onClick={() => setSelectedCategory(null)}
+                className={`px-4 py-2 rounded-full text-sm font-serif transition-all duration-300 ${
+                  selectedCategory === null
+                    ? "bg-stone-800 text-white shadow-md"
+                    : "bg-white text-stone-600 hover:bg-stone-100 border border-stone-200"
+                }`}
+              >
+                全部
+              </button>
+              {remediesData.categories.map((category) => (
+                <button
+                  key={category.id}
+                  onClick={() => setSelectedCategory(category.id)}
+                  className={`px-4 py-2 rounded-full text-sm font-serif transition-all duration-300 ${
+                    selectedCategory === category.id
+                      ? "bg-stone-800 text-white shadow-md"
+                      : "bg-white text-stone-600 hover:bg-stone-100 border border-stone-200"
+                  }`}
+                >
+                  {category.name_zh}
+                </button>
+              ))}
+            </div>
+
+            {/* Search */}
+            <div className="relative w-full max-w-md">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-stone-400 w-4 h-4" />
             <Input
               type="text"
@@ -44,6 +79,8 @@ export default function Encyclopedia() {
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
+        </div>
+
         </div>
 
         {/* Grid */}
