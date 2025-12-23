@@ -53,11 +53,11 @@ export function Card({ id, index, isSelected, isRevealed, onClick, content }: Ca
         animate={{ rotateY: isRevealed ? 180 : 0 }}
       >
         {/* Card Back */}
-        <div className="absolute inset-0 backface-hidden rounded-xl overflow-hidden shadow-md border-2 border-white/50">
+        <div className="absolute inset-0 backface-hidden rounded-xl overflow-hidden shadow-md border-2 border-white/50 bg-[#0A1A3B]">
           <img 
             src="/images/card-back.png" 
             alt="Card Back" 
-            className="w-full h-full object-cover"
+            className="w-full h-full object-contain"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent" />
         </div>

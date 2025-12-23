@@ -108,13 +108,13 @@ export default function Home() {
                         className={cn(
                           "w-16 h-24 sm:w-20 sm:h-32 rounded-lg cursor-pointer transition-all duration-300 transform hover:-translate-y-2",
                           selectedCards.includes(index) ? "ring-2 ring-primary ring-offset-2 -translate-y-4 shadow-lg z-10" : "hover:shadow-md",
-                          "bg-white overflow-hidden border border-stone-200"
+                          "bg-[#0A1A3B] overflow-hidden border border-stone-200"
                         )}
                       >
                         <img 
                           src="/images/card-back.png" 
                           alt="Card Back" 
-                          className="w-full h-full object-cover opacity-90 hover:opacity-100 transition-opacity"
+                          className="w-full h-full object-contain opacity-90 hover:opacity-100 transition-opacity"
                         />
                       </div>
                     </motion.div>
