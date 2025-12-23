@@ -90,7 +90,7 @@ export default function Encyclopedia() {
               <CardContent className="p-0">
                 <div className="aspect-[4/3] overflow-hidden bg-[#F5F5F0] relative">
                   <img
-                    src={`/images/flowers/${remedy.id}.png`}
+                    src={`/images/flowers/${remedy.id}.png?v=2`}
                     alt={remedy.name_zh}
                     className="w-full h-full object-contain p-6 transform group-hover:scale-105 transition-transform duration-500"
                     loading="lazy"

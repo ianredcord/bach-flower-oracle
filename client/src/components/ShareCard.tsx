@@ -42,7 +42,7 @@ export const ShareCard = forwardRef<HTMLDivElement, ShareCardProps>(({ remedy, o
       .catch(err => console.error('Failed to load bg:', err));
 
     // Pre-load flower image as Base64
-    toBase64(`/images/flowers/${remedy.id}.png`)
+    toBase64(`/images/flowers/${remedy.id}.png?v=2`)
       .then((base64) => {
         setFlowerBase64(base64);
         // Notify parent that images are ready

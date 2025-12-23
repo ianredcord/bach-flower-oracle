@@ -76,7 +76,7 @@ export function Card({ id, index, isSelected, isRevealed, onClick, content }: Ca
               <div className="my-4 flex-grow flex items-center justify-center">
                 <div className="w-40 h-40 mx-auto rounded-full overflow-hidden border-4 border-stone-100 shadow-inner bg-stone-50">
                   <img 
-                    src={`/images/flowers/${id}.png`}
+                    src={`/images/flowers/${id}.png?v=2`}
                     alt={content.name_en}
                     className="w-full h-full object-cover hover:scale-110 transition-transform duration-700"
                     loading="eager"
