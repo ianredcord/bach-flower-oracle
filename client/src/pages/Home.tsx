@@ -112,7 +112,7 @@ export default function Home() {
                         )}
                       >
                         <img 
-                          src="/images/card-back.png" 
+                          src="/images/card-back.png?v=2" 
                           alt="Card Back" 
                           className="w-full h-full object-contain opacity-90 hover:opacity-100 transition-opacity"
                         />

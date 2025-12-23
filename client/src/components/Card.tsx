@@ -55,7 +55,7 @@ export function Card({ id, index, isSelected, isRevealed, onClick, content }: Ca
         {/* Card Back */}
         <div className="absolute inset-0 backface-hidden rounded-xl overflow-hidden shadow-md border-2 border-white/50 bg-[#0A1A3B]">
           <img 
-            src="/images/card-back.png" 
+            src="/images/card-back.png?v=2" 
             alt="Card Back" 
             className="w-full h-full object-contain"
           />
