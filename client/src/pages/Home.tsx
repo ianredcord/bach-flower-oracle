@@ -264,13 +264,13 @@ export default function Home() {
           <div className="flex items-center gap-4">
             <Link href="/encyclopedia">
               <a className="text-primary hover:text-primary/80 transition-colors font-serif border-b border-primary/30 pb-0.5 hover:border-primary">
-                花精百科
+                瀏覽花精百科
               </a>
             </Link>
             <span className="text-stone-300">|</span>
             <Link href="/history">
               <a className="text-primary hover:text-primary/80 transition-colors font-serif border-b border-primary/30 pb-0.5 hover:border-primary">
-                巴哈花精的由來
+                巴哈花精起源
               </a>
             </Link>
           </div>
