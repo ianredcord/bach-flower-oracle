@@ -261,11 +261,19 @@ export default function Home() {
 
         {/* Footer Info */}
         <footer className="mt-auto py-8 text-center text-stone-400 text-sm font-light flex flex-col items-center gap-4">
-          <Link href="/encyclopedia">
-            <a className="text-primary hover:text-primary/80 transition-colors font-serif border-b border-primary/30 pb-0.5 hover:border-primary">
-              瀏覽花精百科
-            </a>
-          </Link>
+          <div className="flex items-center gap-4">
+            <Link href="/encyclopedia">
+              <a className="text-primary hover:text-primary/80 transition-colors font-serif border-b border-primary/30 pb-0.5 hover:border-primary">
+                花精百科
+              </a>
+            </Link>
+            <span className="text-stone-300">|</span>
+            <Link href="/history">
+              <a className="text-primary hover:text-primary/80 transition-colors font-serif border-b border-primary/30 pb-0.5 hover:border-primary">
+                巴哈花精的由來
+              </a>
+            </Link>
+          </div>
           <p>© 2025 Bach Flower Oracle. Designed for Inner Peace.</p>
         </footer>
       </main>
