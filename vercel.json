@@ -3,6 +3,10 @@
     {
       "source": "/result/:id",
       "destination": "/api/result/:id"
+    },
+    {
+      "source": "/((?!api|images|assets|favicon|robots|sitemap).*)",
+      "destination": "/index.html"
     }
   ],
   "headers": [
