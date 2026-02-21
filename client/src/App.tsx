@@ -7,7 +7,9 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import Encyclopedia from "./pages/Encyclopedia";
 import History from "./pages/History";
-
+import Systems from "./pages/Systems";
+import Acupuncture from "./pages/Acupuncture";
+import EssentialOil from "./pages/EssentialOil";
 
 function Router() {
   return (
@@ -15,6 +17,9 @@ function Router() {
       <Route path={"/"} component={Home} />
       <Route path={"/encyclopedia"} component={Encyclopedia} />
       <Route path={"/history"} component={History} />
+      <Route path={"/systems"} component={Systems} />
+      <Route path={"/acupuncture"} component={Acupuncture} />
+      <Route path={"/essential-oil"} component={EssentialOil} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />

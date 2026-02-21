@@ -261,10 +261,22 @@ export default function Home() {
 
         {/* Footer Info */}
         <footer className="mt-auto py-8 text-center text-stone-400 text-sm font-light flex flex-col items-center gap-4">
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            <Link href="/systems">
+              <a className="text-primary hover:text-primary/80 transition-colors font-serif border-b border-primary/30 pb-0.5 hover:border-primary">
+                療癒生態系統
+              </a>
+            </Link>
+            <span className="text-stone-300">|</span>
             <Link href="/encyclopedia">
               <a className="text-primary hover:text-primary/80 transition-colors font-serif border-b border-primary/30 pb-0.5 hover:border-primary">
-                瀏覽花精百科
+                花精百科
+              </a>
+            </Link>
+            <span className="text-stone-300">|</span>
+            <Link href="/acupuncture">
+              <a className="text-primary hover:text-primary/80 transition-colors font-serif border-b border-primary/30 pb-0.5 hover:border-primary">
+                董氏穴位詳解
               </a>
             </Link>
             <span className="text-stone-300">|</span>
@@ -273,8 +285,12 @@ export default function Home() {
                 巴哈花精起源
               </a>
             </Link>
+            <span className="text-stone-300">|</span>
+            <a href="https://ai.munione.co" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80 transition-colors font-serif border-b border-primary/30 pb-0.5 hover:border-primary">
+              MUNI 療癒顧問
+            </a>
           </div>
-          <p>© 2025 Bach Flower Oracle. Designed for Inner Peace.</p>
+          <p>© 2025 MUNI. Designed for Holistic Healing.</p>
         </footer>
       </main>
     </div>
